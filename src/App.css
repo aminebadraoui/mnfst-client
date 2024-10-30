@@ -1,7 +1,7 @@
 .app-container {
   height: 100vh;
   overflow-y: auto;
-  scroll-snap-type: y ;
+
 }
 
 
@@ -45,55 +45,10 @@
   overflow-y: auto;
 }
 
-.tech-loader-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-  pointer-events: none;
-}
-
-.main-content {
-  position: relative;
-  z-index: 1;
-}
 
 
-.mnfst-journey {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
 
-.journey-step {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px 0;
-  width: 100%;
-}
 
-.journey-step:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
-}
-
-.journey-arrow {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid rgba(255, 255, 255, 0.1);
-  margin: 10px 0;
-}
-
-.step-content {
-  text-align: center;
-}
 
 @keyframes fadeInUp {
   to {
@@ -108,8 +63,148 @@
   }
 }
 
-.journey-step:nth-child(1) { animation-delay: 0.1s; }
-.journey-step:nth-child(3) { animation-delay: 0.3s; }
-.journey-step:nth-child(5) { animation-delay: 0.5s; }
-.journey-step:nth-child(7) { animation-delay: 0.7s; }
-.journey-step:nth-child(9) { animation-delay: 0.9s; }
+
+/* static tesseract */
+
+.static-tesseract-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  pointer-events: none;
+}
+
+.static-tesseract {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-25deg) rotateY(43deg);
+}
+
+.static-cube {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.static-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid;
+  background: transparent;
+}
+
+.static-outer-cube .static-face {
+  border-image: linear-gradient(
+      to right,
+      #8b5cf6 calc(var(--logo-size) * 0.1),
+      #3b82f6 calc(var(--logo-size) * 0.9)
+  ) 1;
+  border-width: calc(var(--logo-size) * 0.075);
+  border-style: solid;
+}
+
+.static-inner-cube .static-face {
+  border-image: linear-gradient(
+      to right,
+      #3b82f6 calc(var(--logo-size) * 0.1),
+      #8b5cf6 calc(var(--logo-size) * 0.9)
+  ) 1;
+  border-width: calc(var(--logo-size) * 0.1);
+  border-style: solid;
+  opacity: 0.5;
+}
+
+.static-inner-cube {
+  transform: scale3d(0.5, 0.5, 0.5);
+ 
+}
+
+/* Update the face transformations to use relative units */
+.static-front  { transform: translateZ(50%) }
+.static-back   { transform: translateZ(-50%) rotateY(180deg) }
+.static-right  { transform: translateX(50%) rotateY(90deg) }
+.static-left   { transform: translateX(-50%) rotateY(-90deg) }
+.static-top    { transform: translateY(-50%) rotateX(90deg) }
+.static-bottom { transform: translateY(50%) rotateX(-90deg) }
+
+/* flowchart */
+.flowchart-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.flowchart-line {
+  position: absolute;
+  background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+  transform-origin: top;
+  transition: opacity 0.3s ease;
+}
+
+.connector {
+  position: absolute;
+  background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+  transform-origin: top;
+}
+
+.connector-vertical {
+  width: 2px;
+  height: 40px;
+}
+
+.connector-diagonal {
+  width: 2px;
+  height: 60px;
+  transform: rotate(45deg);
+}
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.connector-box {
+    position: relative;
+}
+
+.connector-box::after {
+    content: '';
+    position: absolute;
+    bottom: -30vh;
+    left: 50%;
+    width: 2px;
+    height: 30vh;
+    background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+    transform-origin: top;
+    transform: rotate(var(--connector-angle, 0deg));
+}
+
+.connector-node {
+    position: relative;
+}
+
+.connector-node::before,
+.connector-node::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 25vh;
+    background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+    transform-origin: top;
+}
+
+.connector-node::before {
+    top: 100%;
+    left: 25%;
+    transform: rotate(45deg);
+}
+
+.connector-node::after {
+    top: 100%;
+    right: 25%;
+    transform: rotate(-45deg);
+}

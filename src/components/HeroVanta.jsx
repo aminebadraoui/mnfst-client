@@ -46,7 +46,7 @@ function HeroVanta({
     };
 
     return (
-        <section ref={vantaRef} className="relative inset-0 w-screen h-screen bg-gray-900 text-white flex items-center justify-center">
+        <section ref={vantaRef} className="relative inset-0 w-screen h-screen bg-primary-500 text-white flex items-center justify-center">
             {/* We don't need a background image or overlay anymore */}
             <motion.div
                 className="relative z-20 text-center"
@@ -66,7 +66,7 @@ function HeroVanta({
                 </motion.button>
                 <motion.button
                     onClick={secondaryAction}
-                    className="bg-transparent border-2 border-white text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 inline-block hover:bg-white hover:text-gray-900"
+                    className="bg-transparent border-2 border-white text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 inline-block hover:bg-white hover:text-slate-500"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
@@ -74,7 +74,7 @@ function HeroVanta({
                 </motion.button>
             </motion.div>
             {/* <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-50 text-2xl md:text-3xl cursor-pointer z-20"
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-slate-500 text-2xl md:text-3xl cursor-pointer z-20"
                 onClick={scrollToNextSection}
                 animate={{ y: [0, 10, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}

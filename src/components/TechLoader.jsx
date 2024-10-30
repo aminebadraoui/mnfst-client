@@ -4,33 +4,28 @@ import './TechLoader.css';
 import { motion } from 'framer-motion';
 import { FaChevronDown } from 'react-icons/fa';
 
-const scrollToNextSection = () => {
-    const nextSection = document.querySelector('.main-content');
-    if (nextSection) {
-        nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
-};
+
 
 const TechLoader = () => {
     const messages = [
-        "WE ARE MNFST",
-        "CHANNELING POSITIVE ENERGY",
-        "VISUALIZING INTENTIONS",
-        "MATERIALIZING THOUGHTS",
+        // "WE ARE MNFST",
+        // "CHANNELING POSITIVE ENERGY",
+        // "VISUALIZING INTENTIONS",
+        // "MATERIALIZING THOUGHTS",
     ];
 
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            console.log("Current message:", messages[currentMessageIndex]);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         console.log("Current message:", messages[currentMessageIndex]);
 
-            setCurrentMessageIndex(prevIndex => (prevIndex + 1) % messages.length);
+    //         setCurrentMessageIndex(prevIndex => (prevIndex + 1) % messages.length);
 
-        }, 1800);
+    //     }, 1800);
 
-        return () => clearTimeout(timer);
-    }, [currentMessageIndex, messages.length]);
+    //     return () => clearTimeout(timer);
+    // }, [currentMessageIndex, messages.length]);
 
     return (
         <div className="tech-loader">
@@ -65,7 +60,7 @@ const TechLoader = () => {
                 </div>
             </div>
 
-            <div key={currentMessageIndex} className="message-container">
+            {/* <div key={currentMessageIndex} className="message-container">
                 {messages[currentMessageIndex].split(' ').map((word, wordIndex) => (
                     <span key={wordIndex} className="word-wrapper">
                         {word.split('').map((char, charIndex) => (
@@ -80,16 +75,9 @@ const TechLoader = () => {
                         {wordIndex !== messages[currentMessageIndex].split(' ').length - 1 && ' '}
                     </span>
                 ))}
-            </div>
+            </div> */}
 
-            <motion.div
-                className="absolute bottom-8 left-0 right-0 flex items-center justify-center transform -translate-x-1/2 text-gray-400 text-2xl md:text-3xl cursor-pointer z-20"
-                onClick={scrollToNextSection}
-                animate={{ y: [0, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-            >
-                <FaChevronDown />
-            </motion.div>
+
         </div>
     );
 };

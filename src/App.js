@@ -3,13 +3,62 @@ import { motion, AnimatePresence } from 'framer-motion';
 import TechLoader from './components/TechLoader';
 import { Timeline } from './components/Timeline';
 import emailjs from '@emailjs/browser';
+import ChatBot from './components/ChatBot';
+import AssessmentForm from './components/AssessmentForm';
+import Header from './components/Header';
+import FlowChart from './components/FlowChart';
 
 import './App.css';
 
-import { FaLock, FaRocket, FaMoneyBillWave, FaHandshake, FaSearch, FaTools, FaPaintBrush } from 'react-icons/fa';
+import {
+  FaLock,
+  FaRocket,
+  FaMoneyBillWave,
+  FaHandshake,
+  FaSearch,
+  FaTools,
+  FaPaintBrush,
+  FaGlobe,
+  FaPencilAlt,
+  FaBullseye,
+  FaRobot,
+  FaMobileAlt,
+  FaComments,
+  FaBook,
+  FaCogs,
+  FaChevronDown
+} from 'react-icons/fa';
+import BusinessFlow from './components/BusinessFlow';
 
 
 function App() {
+  // Reusable ServiceCard component
+  const ServiceCard = ({ service, index }) => (
+    <motion.div
+      className="bg-white rounded-xl p-6 backdrop-blur-sm border border-gray-700/50 hover:border-slate-500/50 transition-all group"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
+      whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(147, 51, 234, 0.2)" }}
+    >
+      <div className="mb-4">
+        <service.icon className="w-12 h-12 text-purple-500 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+        {service.title}
+      </h3>
+      <p className="text-slate-500 mb-4">{service.description}</p>
+      <ul className="space-y-2">
+        {service.features.map((feature, i) => (
+          <li key={i} className="text-slate-500 flex items-center">
+            <span className="w-2 h-2 bg-transparent rounded-full mr-2"></span>
+            {feature}
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   const [showTechLoader, setShowTechLoader] = useState(true);
   const [submissionStatus, setSubmissionStatus] = useState(null);
@@ -46,6 +95,12 @@ function App() {
     };
   }, []);
 
+  const scrollToNextSection = () => {
+    const nextSection = document.querySelector('.main-content');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,404 +120,6 @@ function App() {
       });
   };
 
-  const timelineData = [
-    {
-      title: " Who We Are",
-      content: (
-        <motion.div
-          className="snap-section min-h-screen bg-gray-900/50 text-white flex flex-col items-center justify-between p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <motion.div className='flex-1 flex items-center justify-center w-full'>
-            <motion.h2
-              className="text-2xl md:text-3xl font-bold text-center"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              MNFST
-            </motion.h2>
-          </motion.div>
-
-          <motion.div className='flex flex-col  w-full items-center space-y-12 flex-1'>
-            <motion.div className='flex flex-wrap items-center text-center justify-center'>
-              {["MANIFESTORS", "INNOVATORS", "CREATORS"].map((item, index) => (
-                <motion.div key={index}
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(147, 51, 234, 0.5)" }}
-                  className={`flex-1 p-4 m-4 rounded-md border-b border-purple-500 shadow-sm`}
-                >
-                  <h3 className="text-xl font-semibold">{item}</h3>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <div className="w-full max-w-lg space-y-8 mb-6">
-              {[
-                { title: "MANIFEST" },
-                { title: "INNOVATE" },
-                { title: "CREATE" },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="w-full bg-gray-800/50 p-6 rounded-lg relative overflow-hidden group"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="flex items-center justify-center space-x-8">
-                    <p className="w-full text-center">
-                      {item.title === "INNOVATE"
-                        ? "We push the boundaries of digital experiences, crafting solutions that stand out in the crowded digital landscape."
-                        : item.title === "CREATE"
-                          ? "Our team of skilled developers and designers bring your vision to life with precision and creativity."
-                          : "We transform ideas into reality, helping you manifest your digital presence and achieve your goals."}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      ),
-    },
-    {
-      title: "What We Do",
-      content: (
-        <motion.div
-          className="snap-section min-h-screen bg-gray-900/50 text-white flex flex-col items-center justify-between  p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <motion.div className='flex-1 flex items-center justify-center w-full'>
-            <motion.h2
-              className="text-2xl md:text-3xl font-bold text-center"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Crafting Your Digital Vision
-            </motion.h2>
-          </motion.div>
-
-          <motion.div className='flex flex-col w-full items-center space-y-12 flex-1'>
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, staggerChildren: 0.2 }}
-            >
-              {[
-                { title: "Custom Solutions", icon: FaTools, description: "Tailored websites that fit your unique needs." },
-                { title: "Optimized PageSpeed", icon: FaRocket, description: "Lightning-fast websites that keep your visitors engaged and improve SEO." },
-                { title: "Clear Design", icon: FaPaintBrush, description: "Intuitive and visually appealing interfaces that enhance user experience." },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm flex flex-col items-left justify-start space-4 text-left h-full"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(147, 51, 234, 0.5)" }}
-                >
-                  <item.icon className="text-2xl md:text-3xl md:text-4xl text-white mb-4" />
-                  <h3 className="text-xl md:text-2xl font-semibold mb-4">{item.title}</h3>
-                  <p className="text-md md:text-lg">{item.description}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      ),
-    },
-    // {
-    //   title: "What We Offer",
-    //   content: (
-    //     <motion.div className="snap-section min-h-screen bg-gray-900/50 text-white flex flex-col items-center space-y-12 p-8">
-    //       <motion.div className='snap-section-content flex flex-col items-center space-y-12'>
-    //         <motion.h2
-    //           className="text-2xl md:text-3xl  font-bold text-center relative z-10"
-    //           initial={{ opacity: 0, y: -50 }}
-    //           animate={{ opacity: 1, y: 0 }}
-    //           transition={{ duration: 0.8 }}
-    //         >
-    //           Our Promises
-    //         </motion.h2>
-
-    //         <div className="w-full max-w-lg">
-    //           <motion.div
-    //             className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10"
-    //             initial={{ opacity: 0 }}
-    //             animate={{ opacity: 1 }}
-    //             transition={{ delay: 0.5, staggerChildren: 0.2 }}
-    //           >
-    //             {[
-    //               { title: "100% Secure Websites", icon: FaLock, description: "We ensure your website is protected against threats." },
-    //               { title: "Unmatched Support", icon: FaHandshake, description: "We provide unmatched support to ensure your website runs smoothly." },
-    //               { title: "Money Back Guarantee", icon: FaMoneyBillWave, description: "We offer a money back guarantee if you're not satisfied." },
-    //             ].map((item, index) => (
-    //               <motion.div
-    //                 key={index}
-    //                 className="bg-gray-800/50 p-8 rounded-lg relative overflow-hidden group backdrop-blur-sm"
-    //                 initial={{ opacity: 0, y: 50 }}
-    //                 animate={{ opacity: 1, y: 0 }}
-    //                 transition={{ delay: index * 0.2 }}
-    //                 whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(147, 51, 234, 0.5)" }}
-    //               >
-    //                 <div className="relative z-10">
-    //                   <item.icon className="text-2xl md:text-3xl mb-4 text-white" />
-    //                   <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
-    //                   <p>{item.description}</p>
-    //                 </div>
-    //               </motion.div>
-    //             ))}
-    //           </motion.div>
-    //         </div>
-    //       </motion.div>
-    //     </motion.div>
-    //   ),
-    // },
-    {
-      title: "Our Process",
-      content: (
-        <motion.div
-          className="snap-section min-h-screen bg-gray-900/50 text-white flex flex-col items-center justify-between p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          {/* <motion.div className='flex-1 flex items-center justify-center w-full'>
-            <motion.h2
-              className="text-2xl md:text-3xl font-bold text-center"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              The MNFST Journey
-            </motion.h2>
-          </motion.div> */}
-
-          <motion.div className='flex flex-col w-full items-center space-y-12 flex-1'>
-            <motion.div
-              className="mnfst-journey"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, staggerChildren: 0.2 }}
-            >
-              {["Envision", "Align", "Create", "Optimize", "Launch"].map((step, index) => (
-                <motion.div key={step}
-                  className='w-full flex flex-col items-center'
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}>
-                  <React.Fragment key={step}>
-                    <motion.div className="journey-step">
-                      <div className="step-content">
-                        <h3 className="text-2xl font-semibold">{step}</h3>
-                        <p>{getStepDescription(step)}</p>
-                      </div>
-                    </motion.div>
-                    {index < 4 && <div className="journey-arrow"></div>}
-                  </React.Fragment>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      ),
-    },
-    // {
-    //   title: "Pricing",
-    //   content: (
-    //     <motion.div className="snap-section min-h-screen bg-gray-900/50 text-white flex flex-col items-centers space-y-12 p-8">
-
-    //       <motion.div className='snap-section-content flex flex-col items-center space-y-12'>
-    //         <motion.h2
-    //           className="text-2xl md:text-3xl  font-bold text-center relative z-10"
-    //           initial={{ opacity: 0, y: -50 }}
-    //           animate={{ opacity: 1, y: 0 }}
-    //           transition={{ duration: 0.8 }}
-    //         >
-    //           Invest in Your Digital Future
-    //         </motion.h2>
-
-    //         <div className="flex-1 w-full max-w-lg">
-    //           <motion.div
-    //             className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl"
-    //             initial={{ y: 50, opacity: 0 }}
-    //             animate={{ y: 0, opacity: 1 }}
-    //             transition={{ delay: 0.5, staggerChildren: 0.2 }}
-    //           >
-    //             {["One-Time Payment", "Monthly Plan"].map((plan, index) => (
-    //               <motion.div
-    //                 key={index}
-    //                 className="bg-gray-900 p-8 rounded-lg shadow-lg relative overflow-hidden group"
-    //                 whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(147, 51, 234, 0.5)" }}
-    //               >
-    //                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/50 to-indigo-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-    //                 <div className="relative z-10">
-    //                   <h3 className="text-2xl md:text-3xl font-semibold mb-4">{plan}</h3>
-    //                   <ul className="list-disc list-inside space-y-2 mb-6">
-    //                     {plan === "Monthly Plan" ? (
-    //                       <>
-    //                         <li>$0 Down</li>
-    //                         <li>$200 per month</li>
-    //                         <li>Ongoing support and updates</li>
-    //                       </>
-    //                     ) : (
-    //                       <>
-    //                         <li>Custom quote based on project scope</li>
-    //                         <li>Full ownership upon completion</li>
-    //                         <li>30 days of post-launch support</li>
-    //                       </>
-    //                     )}
-    //                   </ul>
-    //                   <button className="bg-white text-gray-900 font-bold py-2 px-4 rounded w-full">
-    //                     Get Started
-    //                   </button>
-    //                 </div>
-    //               </motion.div>
-    //             ))}
-    //           </motion.div>
-    //         </div>
-
-    //       </motion.div>
-    //     </motion.div>
-    //   ),
-    // },
-    {
-      title: "Get in Touch",
-      content: (
-        <motion.div
-          className="snap-section min-h-screen bg-gray-900/50 text-white flex flex-col items-center justify-between p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <motion.div className='flex-1 flex items-center justify-center w-full'>
-            <motion.h2
-              className="text-2xl md:text-3xl font-bold text-center"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Let's Manifest Your Vision
-            </motion.h2>
-          </motion.div>
-
-          <motion.div className='flex flex-col w-full items-center space-y-12 flex-1'>
-            <div className="flex-1 w-full max-w-lg">
-              <motion.form
-                ref={form}
-                className="w-full max-w-lg"
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                onSubmit={handleSubmit}
-              >
-                {submissionStatus === 'success' ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="text-green-500 p-4 rounded-lg mb-6"
-                  >
-                    Message sent successfully! We'll get back to you soon.
-                  </motion.div>
-                ) : submissionStatus === 'error' ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-red-500 p-4 rounded-lg mb-6"
-                  >
-                    Failed to send message. Please try again later.
-                  </motion.div>
-                ) : null}
-
-                {submissionStatus !== 'success' && (
-                  <>
-                    <div className="flex flex-wrap -mx-3 mb-6">
-                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <motion.input
-                          name="from_name"
-                          className="appearance-none block w-full bg-gray-900 text-white border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-600"
-                          type="text"
-                          placeholder="Name"
-                          whileFocus={{ scale: 1.0 }}
-                          required
-                        />
-                      </div>
-                      <div className="w-full md:w-1/2 px-3">
-                        <motion.input
-                          name="user_email"
-                          className="appearance-none block w-full bg-gray-900 text-white border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600"
-                          type="email"
-                          placeholder="Email"
-                          whileFocus={{ scale: 1.0 }}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap -mx-3 mb-6">
-                      <div className="w-full px-3">
-                        <motion.input
-                          name="user_phone"
-                          className="appearance-none block w-full bg-gray-900 text-white border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-600"
-                          type="tel"
-                          placeholder="Phone (optional)"
-                          whileFocus={{ scale: 1.05 }}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap -mx-3 mb-6">
-                      <div className="w-full px-3">
-                        <motion.textarea
-                          name="message"
-                          className="appearance-none block w-full bg-gray-900 text-white border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-600 h-48 resize-none"
-                          placeholder="Your Message"
-                          whileFocus={{ scale: 1.0 }}
-                          required
-                        ></motion.textarea>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap -mx-3 mb-6">
-                      <div className="w-full px-3">
-                        <motion.button
-                          className="bg-white text-gray-900 font-bold py-2 px-4 rounded w-full"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          type="submit"
-                          disabled={submissionStatus === 'submitting'}
-                        >
-                          {submissionStatus === 'submitting' ? 'Sending...' : 'Send Message'}
-                        </motion.button>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </motion.form>
-            </div>
-          </motion.div>
-        </motion.div>
-      ),
-    },
-  ];
-
-  // Helper function for step descriptions
-  function getStepDescription(step) {
-    const descriptions = {
-      Envision: "We deeply understand your vision and intentions.",
-      Align: "Your goals are aligned with the latest web technologies.",
-      Create: "We craft your digital solution with precision and care.",
-      Optimize: "Your project is fine-tuned for peak performance and user experience.",
-      Launch: "Your vision manifests into the digital realm."
-    };
-    return descriptions[step];
-  }
 
   const containerRef = useRef(null);
   const [isContainerReady, setIsContainerReady] = useState(false);
@@ -474,20 +131,98 @@ function App() {
   }, []);
 
   return (
-    <div ref={containerRef} className="app h-screen w-full bg-gray-950 snap-y overflow-y-scroll overflow-x-hidden">
+    <>
+      <div className='bg-transparent fixed top-0 left-0 w-full h-full z-10'>
+        <TechLoader />
+      </div>
 
-      <div className="snap-section">
-        <div className="snap-section-content">
-          <TechLoader />
+      <div ref={containerRef} className="app w-full h-full">
+        <Header />
+
+        <div className="pt-8  md:pt-0 relative h-full w-full my-16 m-auto z-20">
+          <div className="min-h-screen flex flex-col lg:flex-row">
+            <div className='flex flex-col lg:flex-row items-center justify-center p-4 lg:p-8 text-center w-full'>
+              <h1 className='m-4 lg:m-8 text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500'>
+                We turn your business into an automated powerhouse
+              </h1>
+              <AssessmentForm />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className='h-[2px] w-screen bg-gray-900'> </div>
+        {/* Overlapping Save Time Section */}
+        <motion.div
+          className="relative -mb-16 z-10 w-full flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className=" max-w-2xl w-full p-8 backdrop-blur-sm border border-gray-700/50 bg-purple-500/80"
+            whileHover={{ boxShadow: "0 0 30px rgba(147, 51, 234, 0.3)" }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-center  text-white ">
+              Save Time and Resources
+            </h2>
+          </motion.div>
+        </motion.div>
 
-      <div className='main-content w-full h-full bg-gray-950 '>
-        {isContainerReady && <Timeline data={timelineData} containerRef={containerRef} />}
+        <motion.div
+          className="w-full bg-gray-950 flex items-center justify-center p-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+
+          <BusinessFlow />
+        </motion.div>
+
+        {/* Overlapping Tech Stack Section */}
+        <motion.div
+          className="relative -mt-16 z-10 w-full flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className="max-w-2xl w-full p-8 backdrop-blur-sm border border-gray-700/50 bg-purple-500/80"
+            whileHover={{ boxShadow: "0 0 30px rgba(147, 51, 234, 0.3)" }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-white">
+              Our Tech Stack
+            </h2>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="w-full m-auto flex items-center justify-center "
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            className="max-w-2xl  m-8 w-full rounded-2xl p-8 backdrop-blur-sm border border-gray-700/50"
+            whileHover={{ boxShadow: "0 0 30px rgba(147, 51, 234, 0.3)" }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+              Transform Your Business with AI
+            </h2>
+            <p className="text-slate-500 text-center mb-8">
+              Book a free consultation to discover how our AI solutions can automate and enhance your digital presence.
+            </p>
+            <motion.a
+              href="https://cal.com/your-calendar"
+              className="block w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold py-4 px-8 rounded-xl text-center text-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Schedule a Call
+            </motion.a>
+          </motion.div>
+        </motion.div>
+
       </div>
-    </div>
+    </>
   );
 }
 export default App;
