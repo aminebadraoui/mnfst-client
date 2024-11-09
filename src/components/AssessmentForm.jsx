@@ -56,7 +56,12 @@ const formStructure = {
     "Basic Information": {
         intro: "Let's start with a little bit about your business to personalize your results.",
         questions: [
-            { name: "industry", label: "What industry are you in?", options: formOptions.industries },
+            {
+                name: "industry",
+                label: "What industry are you in?",
+                type: "text",
+                required: true
+            },
             { name: "businessSize", label: "What's your business size?", options: formOptions.businessSizes },
             { name: "primaryGoal", label: "What's your primary business goal?", options: formOptions.primaryGoals }
         ]
@@ -88,7 +93,7 @@ const formStructure = {
 
 const inputStyles = {
     select: "w-full  border border-gray-700 rounded-lg px-4 py-3 text-slate-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNSA3LjVMMTAgMTIuNUwxNSA3LjUiIHN0cm9rZT0iIzZCNzI4MCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==')] bg-no-repeat bg-[position:right_1rem_center] bg-[length:20px] ",
-    input: "w-full border border-gray-700 rounded-lg px-4 py-3 text-slate-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ",
+    input: "w-full  border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent ",
     checkbox: "h-5 w-5 rounded border-slate-50/50 text-purple-500 focus:ring-2 focus:ring-purple-500 focus:ring-offset-0",
     label: "block text-slate-50 font-medium mb-2",
     error: "text-red-400 text-sm mt-1",
@@ -186,7 +191,7 @@ const StepIndicator = ({ currentStep, totalSteps }) => {
                         transition={{ duration: 0.3 }}
                     />
                 </div>
-                <div className="mt-2 text-right text-sm text-slate-500">
+                <div className="mt-2 text-right text-sm text-slate-50">
                     Question {currentStep} of {totalSteps}
                 </div>
             </div>
@@ -196,6 +201,7 @@ const StepIndicator = ({ currentStep, totalSteps }) => {
 
 
 const AssessmentForm = () => {
+    const [formData, setFormData] = useState({});
     const [step, setStep] = useState(1);
     const [score, setScore] = useState(0);
     const [showResults, setShowResults] = useState(false);
@@ -206,6 +212,119 @@ const AssessmentForm = () => {
         resolver: zodResolver(formSchema),
         mode: "onChange"
     });
+
+    const onSubmit = async (data) => {
+        setFormData(data);
+        const finalScore = calculateScore(data);
+        setScore(finalScore);
+        setShowResults(true);
+    };
+
+    const handleEmailSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const templateParams = {
+                email: email,
+                scoreData: {
+                    score: score,
+                    category: getCategory(),
+                    focusArea: getFocusArea(),
+                    recommendation: getRecommendation(),
+                },
+                formData: formData
+            }
+
+            const body = JSON.stringify(templateParams);
+
+            console.log(body);
+
+            const response = await fetch('https://n8n.mnfstagency.com/webhook-test/assessment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: body
+            });
+
+            if (response.ok) {
+                console.log('form sent successfully to n8n');
+            } else {
+                console.error('Failed to send form');
+            }
+
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
+
+    const renderStep = () => {
+        const totalSteps = Object.values(formStructure).flatMap(section => section.questions).length;
+        const currentSection = Object.entries(formStructure).find(([_, section]) => {
+            const sectionStart = Object.values(formStructure)
+                .slice(0, Object.keys(formStructure).indexOf(_))
+                .flatMap(s => s.questions)
+                .length + 1;
+            const sectionEnd = sectionStart + section.questions.length - 1;
+            return step >= sectionStart && step <= sectionEnd;
+        });
+
+        if (!currentSection) return null;
+
+        const [sectionTitle, section] = currentSection;
+        const questionIndex = step - Object.values(formStructure)
+            .slice(0, Object.keys(formStructure).indexOf(sectionTitle))
+            .flatMap(s => s.questions)
+            .length - 1;
+        const question = section.questions[questionIndex];
+
+        return (
+            <FormStep isActive={true}>
+                <h3 className="text-2xl font-bold mb-4 text-slate-50">
+                    {sectionTitle}
+                </h3>
+                <p className="text-slate-50 mb-6">
+                    {section.intro}
+                </p>
+
+                <FormInput label={question.label} error={errors[question.name]?.message}>
+                    {question.type === "checkbox" ? (
+                        <div className="space-y-2">
+                            {question.options.map(option => (
+                                <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-slate-50/50 hover:border-slate-50">
+                                    <input
+                                        type="checkbox"
+                                        value={option}
+                                        {...register(question.name)}
+                                        className={inputStyles.checkbox}
+                                    />
+                                    <span className={inputStyles.checkboxLabel}>{option}</span>
+                                </label>
+                            ))}
+                        </div>
+                    ) : question.type === "text" ? (
+                        <input
+                            type="text"
+                            {...register(question.name)}
+                            className={inputStyles.input}
+                            placeholder="Enter your industry"
+                        />
+                    ) : question.type === "url" || question.type === "email" ? (
+                        <input
+                            type={question.type}
+                            {...register(question.name)}
+                            placeholder={question.type === "url" ? "https://your-website.com" : "your@email.com"}
+                            className={inputStyles.input}
+                        />
+                    ) : (
+                        <SelectionGroup
+                            options={question.options}
+                            register={register}
+                            name={question.name}
+                            value={watch(question.name)}
+                        />
+                    )}
+                </FormInput>
+            </FormStep>
+        );
+    };
 
     const PresentationScreen = () => (
         <motion.div
@@ -335,139 +454,74 @@ const AssessmentForm = () => {
         return Math.min(totalScore, 150);
     };
 
-    const onSubmit = async (data) => {
-        const finalScore = calculateScore(data);
-        setScore(finalScore);
-        setShowResults(true);
+    const getCategory = () => {
+        if (score <= 50) return "Beginner";
+        if (score <= 100) return "Intermediate";
+        return "Advanced";
     };
 
-    const handleEmailSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('/api/assessment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, score })
-            });
-            // Handle response
-        } catch (error) {
-            console.error('Error submitting email:', error);
+    const getFocusArea = () => {
+        switch (getCategory()) {
+            case "Beginner":
+                return "Build Online Foundation";
+            case "Intermediate":
+                return "Grow and Streamline Engagement";
+            case "Advanced":
+                return "Optimize and Personalize";
+            default:
+                return "";
         }
     };
 
-    const renderStep = () => {
-        const totalSteps = Object.values(formStructure).flatMap(section => section.questions).length;
-        const currentSection = Object.entries(formStructure).find(([_, section]) => {
-            const sectionStart = Object.values(formStructure)
-                .slice(0, Object.keys(formStructure).indexOf(_))
-                .flatMap(s => s.questions)
-                .length + 1;
-            const sectionEnd = sectionStart + section.questions.length - 1;
-            return step >= sectionStart && step <= sectionEnd;
-        });
+    const getRecommendation = () => {
+        const recommendations = [];
 
-        if (!currentSection) return null;
+        // Website presence
+        if (!formData.website) {
+            recommendations.push("Establish a responsive, SEO-optimized website.");
+        }
 
-        const [sectionTitle, section] = currentSection;
-        const questionIndex = step - Object.values(formStructure)
-            .slice(0, Object.keys(formStructure).indexOf(sectionTitle))
-            .flatMap(s => s.questions)
-            .length - 1;
-        const question = section.questions[questionIndex];
+        // formData Media Activity
+        if (formData.socialMediaActivity === 'Only 1-2 platforms' || formData.socialMediaActivity === 'None') {
+            recommendations.push("Expand your reach by becoming active on more social platforms.");
+        }
 
-        return (
-            <FormStep isActive={true}>
-                <h3 className="text-2xl font-bold mb-4 text-slate-50">
-                    {sectionTitle}
-                </h3>
-                <p className="text-slate-50 mb-6">
-                    {section.intro}
-                </p>
+        // Content Frequency
+        if (formData.contentFrequency === 'Rarely/Never' || formData.contentFrequency === 'Monthly') {
+            recommendations.push("Increase content frequency to engage your audience consistently.");
+        }
 
-                <FormInput label={question.label} error={errors[question.name]?.message}>
-                    {question.type === "checkbox" ? (
-                        <div className="space-y-2">
-                            {question.options.map(option => (
-                                <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-slate-50/50 hover:border-slate-50">
-                                    <input
-                                        type="checkbox"
-                                        value={option}
-                                        {...register(question.name)}
-                                        className={inputStyles.checkbox}
-                                    />
-                                    <span className={inputStyles.checkboxLabel}>{option}</span>
-                                </label>
-                            ))}
-                        </div>
-                    ) : question.type === "url" || question.type === "email" ? (
-                        <input
-                            type={question.type}
-                            {...register(question.name)}
-                            placeholder={question.type === "url" ? "https://your-website.com" : "your@email.com"}
-                            className={inputStyles.input}
-                        />
-                    ) : (
-                        <SelectionGroup
-                            options={question.options}
-                            register={register}
-                            name={question.name}
-                            value={watch(question.name)}
-                        />
-                    )}
-                </FormInput>
-            </FormStep>
-        );
+        // Lead Generation
+        if (formData.leadGeneration.length < 2) {
+            recommendations.push("Diversify lead generation strategies for better outreach.");
+        }
+
+        // Automation Level
+        if (formData.automatedTools !== 'Fully automated') {
+            recommendations.push("Consider full automation to streamline workflows.");
+        }
+
+        // Content Types
+        if (formData.contentTypes.length < 2) {
+            recommendations.push("Expand content types to reach a broader audience.");
+        }
+
+        // Content Planning
+        if (formData.contentPlanning !== 'Data-driven strategy') {
+            recommendations.push("Adopt a data-driven strategy for more effective content planning.");
+        }
+
+        return recommendations;
     };
 
-    const ResultsDisplay = ({ score, data }) => {
-        const getCategory = () => {
-            if (score <= 50) return "Beginner";
-            if (score <= 100) return "Intermediate";
-            return "Advanced";
-        };
+    const getBenefits = () => [
+        "Expanded Action Plan with detailed steps",
+        "AI-powered tool recommendations tailored to your business",
+        "Bonus checklist for tracking your growth",
+        "Access to a free consultation or demo of our AI-driven tools"
+    ];
 
-        const getFocusArea = () => {
-            switch (getCategory()) {
-                case "Beginner":
-                    return "Build Online Foundation";
-                case "Intermediate":
-                    return "Grow and Streamline Engagement";
-                case "Advanced":
-                    return "Optimize and Personalize";
-                default:
-                    return "";
-            }
-        };
-
-        const getRecommendation = () => {
-            switch (getCategory()) {
-                case "Beginner":
-                    return [
-                        "Establish a responsive, SEO-optimized website",
-                        "Select 1-2 social media channels to engage your audience effectively"
-                    ];
-                case "Intermediate":
-                    return [
-                        "Implement a consistent SEO plan",
-                        "Increase content frequency with AI-driven content automation tools"
-                    ];
-                case "Advanced":
-                    return [
-                        "Leverage visitor-adaptive design recommendations for higher conversions",
-                        "Automate complex processes like customer segmentation and personalized content delivery"
-                    ];
-                default:
-                    return [];
-            }
-        };
-
-        const getBenefits = () => [
-            "Expanded Action Plan with detailed steps",
-            "AI-powered tool recommendations tailored to your business",
-            "Bonus checklist for tracking your growth",
-            "Access to a free consultation or demo of our AI-driven tools"
-        ];
-
+    const ResultsDisplay = () => {
         return (
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -512,7 +566,7 @@ const AssessmentForm = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email to receive the full plan"
-                        className="w-full p-3 rounded-lg border border-gray-700 text-slate-500"
+                        className={inputStyles.input}
                         required
                     />
                     <motion.button
@@ -533,12 +587,10 @@ const AssessmentForm = () => {
 
     return (
         <motion.div
-            className="w-full bg-purple-800  rounded-xl p-8"
+            className="w-full bg-white/5  rounded-xl p-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
         >
-
-
 
             {
                 showPresentation ? (
@@ -560,7 +612,7 @@ const AssessmentForm = () => {
                                     <motion.button
                                         type="button"
                                         onClick={() => setStep(step - 1)}
-                                        className="px-6 py-2 rounded-lg border border-gray-700 text-slate-50 hover:border-slate-500"
+                                        className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg text-slate-50 hover:border-slate-500"
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
@@ -577,7 +629,7 @@ const AssessmentForm = () => {
                                     }}
                                     className={`px-6 py-2 rounded-lg ${canProceedToNext()
                                         ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white'
-                                        : 'text-slate-50 cursor-not-allowed'
+                                        : ' bg-purple-900/50 text-slate-50 cursor-not-allowed'
                                         } ml-auto`}
                                     whileHover={canProceedToNext() ? { scale: 1.05 } : {}}
                                     whileTap={canProceedToNext() ? { scale: 0.95 } : {}}

@@ -7,6 +7,7 @@ const Logo = ({ className, size = 40 }) => {
             '--logo-size': `${size}px`,
         }}
     >
+
         <div className="static-tesseract">
             <div className="static-cube static-outer-cube">
                 <div className="static-face static-front"></div>

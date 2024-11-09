@@ -5,7 +5,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
+  background-color: #18181b;
+  scroll-padding-top: 100px;
 }
 
 .parallax-bg {
@@ -34,4 +35,36 @@ html, body {
 .snap-section-content {
   min-height: 100%;
 }
+}
+
+@layer components {
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid #8b5cf6; /* purple-500 */
+    border-radius: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+  }
+
+  input[type="checkbox"]:checked {
+    background-color: #8b5cf6; /* purple-500 */
+    border-color: #8b5cf6;
+  }
+
+  input[type="checkbox"]:checked::before {
+    content: "✓";
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3); /* purple-500 with opacity */
+  }
 }
