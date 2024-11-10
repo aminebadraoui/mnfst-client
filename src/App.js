@@ -2,28 +2,36 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TechLoader from './components/TechLoader';
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import Header from './components/Header';
 
 import './App.css';
 
 import {
-  FaHandshake,
-  FaGlobe,
   FaRobot,
-  FaCogs,
-  FaTimes,
   FaCheck,
-  FaCalendar,
   FaLinkedin,
   FaTwitter,
-  FaGithub
+  FaGithub,
+  FaClock,
+  FaChartLine,
+  FaDollarSign,
+  FaMagnet,
+  FaUserCircle,
+  FaPen,
+  FaUsers,
+  FaBook,
+  FaTasks,
+  FaArrowUp,
+  FaHeadset,
+
 } from 'react-icons/fa';
 
-import BusinessFlow from './components/BusinessFlow';
-
-import Logo from './components/Logo'
+import LogoScroll from './components/LogoScroll'
 import Accordion from './components/Accordion'
-import CalendlyInline from './components/CalendlyInline'
 import { InlineWidget } from "react-calendly";
 
 const scrollToSection = (sectionId) => {
@@ -33,120 +41,234 @@ const scrollToSection = (sectionId) => {
   }
 };
 
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 4000,
+  arrows: true,
+  responsive: [
+    {
+      breakpoint: 1280,
+      settings: {
+        slidesToShow: 2,
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+      }
+    }
+  ]
+};
+
 function App() {
   return (
     <>
       <div className='bg-transparent fixed top-0 left-0 bottom-0 right-0 pointer-events-none'>
         <TechLoader />
       </div>
-      <div className="app bg-gray-950 w-full h-full z-10">
+      <div className="app  w-full h-full z-10">
         <Header />
 
-        <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center px-4 py-20">
-          <div className="text-center max-w-5xl mx-auto">
+        {/* Hero Section */}
+        <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-between px-4">
+          <div className="mt-40 text-center max-w-5xl mx-auto">
 
 
             <h1 className="text-5xl md:text-7xl font-bold mb-8">
-              <span className="text-white">We turn your business into an </span>
+              <span className="text-white">Transform Your Business With </span>
               <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-                automated powerhouse
+                Intelligent Automation
               </span>
             </h1>
 
             <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
-              From AI-powered websites to intelligent automation, we help businesses scale with
-              ready-to-deploy AI solutions that deliver immediate value.
+              We build custom AI solutions that automate your workflows, enhance customer engagement,
+              and drive growth - all while seamlessly integrating with your existing systems.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.a
-                onClick={() => scrollToSection('book-call')}
-                className="px-8 py-4 hover:cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-xl"
+              <motion.button
+                onClick={() => scrollToSection('solutions')}
+                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-xl"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Book intro call →
-              </motion.a>
+                Explore Solutions →
+              </motion.button>
 
               <motion.button
-                className="px-8 py-4 hover:cursor-pointer border border-gray-700 text-white font-semibold rounded-xl"
+                className="px-8 py-4 border border-gray-700 text-white font-semibold rounded-xl"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection('pricing')}
               >
-                View pricing
+                View Pricing
               </motion.button>
             </div>
           </div>
+          <LogoScroll />
         </div>
 
-        {/* AI Services Overview Section */}
-        <div id="solutions" className="w-full bg-gray-950 py-24 px-4 z-10">
+        {/* Our Agents Section */}
+        <div className="w-full bg-gray-950 py-24 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="mb-4">
+            <div className="text-center mb-20">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                AI SOLUTIONS AS A SERVICE
+                MEET YOUR AI TEAM
               </span>
+              <h2 className="text-5xl font-bold text-white mt-6 mb-6">
+                AI Agents That Work For You 24/7
+              </h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                Your tireless digital workforce that handles tasks while you focus on growth
+              </p>
             </div>
 
-            <h2 className="text-5xl font-bold text-white mb-6">
-              A better way to implement AI
-            </h2>
-
-            <p className="text-xl text-gray-400 max-w-3xl mb-20">
-              Building AI solutions in-house is complex, time-consuming, and requires specialized expertise.
-              We take a different approach: ready-to-deploy AI solutions on a simple monthly subscription
-              to give you enterprise-level AI capabilities for less.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              <div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
-                  1
+            <div className="relative px-12">
+              <Slider {...settings}>
+                {/* Lead Generation Agent */}
+                <div className="px-4">
+                  <motion.div
+                    className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 h-[340px] flex flex-col"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="mb-auto">
+                      <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                        <FaMagnet className="w-6 h-6 text-purple-500" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-4">Lead Generation Agent</h3>
+                      <p className="text-gray-400 mb-6">Converts website visitors into qualified leads 24/7.</p>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Books meetings automatically
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Qualifies prospects instantly
+                      </li>
+                    </ul>
+                  </motion.div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Rapid Implementation
-                </h3>
-                <p className="text-gray-400">
-                  Why spend months building from scratch? Our pre-built AI components
-                  and frameworks mean you can have a custom solution up and running in days.
-                  Start with what you need and scale as you grow.
-                </p>
-              </div>
 
-              <div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
-                  2
+                {/* Customer Service Agent */}
+                <div className="px-4">
+                  <motion.div
+                    className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 h-[340px] flex flex-col"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="mb-auto">
+                      <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                        <FaHeadset className="w-6 h-6 text-purple-500" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-4">Customer Service Agent</h3>
+                      <p className="text-gray-400 mb-6">Your tireless support representative.</p>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Responds in seconds 24/7
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Resolves common issues instantly
+                      </li>
+                    </ul>
+                  </motion.div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Seamless Integration
-                </h3>
-                <p className="text-gray-400">
-                  We handle all the complex AI infrastructure while integrating smoothly
-                  with your existing systems. Regular updates and monitoring ensure your
-                  AI solutions stay cutting-edge and reliable.
-                </p>
-              </div>
 
-              <div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
-                  3
+                {/* AI Twin Agent */}
+                <div className="px-4">
+                  <motion.div
+                    className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 h-[340px] flex flex-col"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="mb-auto">
+                      <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                        <FaUserCircle className="w-6 h-6 text-purple-500" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-4">AI Twin Agent</h3>
+                      <p className="text-gray-400 mb-6">Scale your presence without scaling your time.</p>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Engages with your audience
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Provides personalized guidance
+                      </li>
+                    </ul>
+                  </motion.div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Flexible & Future-Proof
-                </h3>
-                <p className="text-gray-400">
-                  From AI-powered websites to custom chatbots and workflow automation,
-                  our solutions evolve with your needs. We continuously update and optimize
-                  your AI systems to leverage the latest technologies.
-                </p>
-              </div>
+
+                {/* Content Creator Agent */}
+                <div className="px-4">
+                  <motion.div
+                    className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 h-[340px] flex flex-col"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="mb-auto">
+                      <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                        <FaPen className="w-6 h-6 text-purple-500" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-4">Content Creator Agent</h3>
+                      <p className="text-gray-400 mb-6">Your automated content marketing team.</p>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Creates engaging content daily
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Maintains consistent posting
+                      </li>
+                    </ul>
+                  </motion.div>
+                </div>
+
+                {/* Personal Assistant Agent */}
+                <div className="px-4">
+                  <motion.div
+                    className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 h-[340px] flex flex-col"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="mb-auto">
+                      <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                        <FaClock className="w-6 h-6 text-purple-500" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-4">Personal Assistant Agent</h3>
+                      <p className="text-gray-400 mb-6">Handles your routine tasks automatically.</p>
+                    </div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Manages emails & scheduling
+                      </li>
+                      <li className="flex items-center gap-3 text-gray-300">
+                        <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
+                        Organizes documents & tasks
+                      </li>
+                    </ul>
+                  </motion.div>
+                </div>
+              </Slider>
             </div>
           </div>
         </div>
 
-        {/* Services Section */}
-        <div id="how-it-works" className="w-full bg-gray-950 py-24 px-4 z-10">
+
+        {/* Solutions Section */}
+        <div id="solutions" className="w-full bg-gray-950 py-24 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
@@ -155,435 +277,592 @@ function App() {
             </div>
 
             <h2 className="text-5xl font-bold text-white mb-6">
-              Transform your business with AI
+              AI Solutions Tailored to Your Business
             </h2>
 
             <p className="text-xl text-gray-400 max-w-3xl mb-20">
-              From intelligent websites to automated workflows, we provide end-to-end AI solutions
-              that help businesses scale and operate more efficiently.
+              Discover how our AI solutions can transform your business operations, enhance customer experience, and drive growth - all without requiring technical expertise.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              <div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
-                  <FaGlobe className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  AI-Powered Websites
-                </h3>
-                <p className="text-gray-400">
-                  Modern websites with integrated AI features that engage visitors,
-                  personalize experiences, and convert better than traditional sites.
-                  Built with the latest AI technologies.
+            {/* Customer Engagement Suite */}
+            <div className="mb-32">
+              <div className="text-center mb-16">
+                <h3 className="text-4xl font-bold text-white mb-6">Customer Engagement Suite</h3>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Never miss a customer inquiry again. Let AI handle your customer service 24/7.
                 </p>
               </div>
 
-              <div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
-                  <FaRobot className="w-6 h-6" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                {/* Features */}
+                <div className="space-y-8">
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaRobot className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2">Customer Service Chatbot Agent`</h4>
+                      <p className="text-gray-400">Your 24/7 customer service representative, handling questions instantly.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaMagnet className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2">Smart Lead Capture Chatbot Agent</h4>
+                      <p className="text-gray-400">Converts visitors into leads through natural conversation.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaUsers className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2">Community Engagement Agent </h4>
+                      <p className="text-gray-400">Keeps your community active by handling comments and FAQs.</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Custom Chatbots
-                </h3>
-                <p className="text-gray-400">
-                  Intelligent chatbots that understand context and provide meaningful
-                  responses. Available 24/7 to handle customer inquiries, qualify leads,
-                  and streamline support.
+
+                {/* Benefits */}
+                <div className="bg-gray-900/50 p-10 rounded-2xl border border-gray-800">
+                  <div className="mb-10">
+                    <h4 className="text-2xl font-semibold text-white mb-6">Perfect For:</h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaCheck className="text-purple-500 flex-shrink-0" />
+                        Business owners tired of missing inquiries
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaCheck className="text-purple-500 flex-shrink-0" />
+                        Companies wanting more website conversions
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-2xl font-semibold text-white mb-6">Business Impact:</h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        Response time: Hours → Seconds
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        3x more leads from your website
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        Save 40+ hours monthly
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center mt-12">
+                <motion.button
+                  className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection('book-call')}
+                >
+                  Learn More About Customer Engagement →
+                </motion.button>
+              </div>
+            </div>
+
+            {/* Creator & Coach Package */}
+            <div className="mb-32">
+              <div className="text-center mb-16">
+                <h3 className="text-4xl font-bold text-white mb-6">Creator & Coach Package</h3>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Scale your impact without scaling your time. Let AI be your digital twin.
                 </p>
               </div>
 
-              <div>
-                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
-                  <FaCogs className="w-6 h-6" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                {/* Features */}
+                <div className="space-y-8">
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaUserCircle className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2">Your AI Twin Agent</h4>
+                      <p className="text-gray-400">An AI version of you that chats with followers and provides guidance - just like you would.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaPen className="w-5 h-5 text-purple-500" />
+                    </div>
+
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2"> Content Creator Agent</h4>
+                      <p className="text-gray-400">Creates engaging content in your voice across all platforms.</p>
+                    </div>
+
+                  </div>
+
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaUsers className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2">Community Engagement Agent </h4>
+                      <p className="text-gray-400">Keeps your community active by handling comments and FAQs.</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Workflow Automation
-                </h3>
-                <p className="text-gray-400">
-                  Streamline your business processes with intelligent automation.
-                  From data entry to complex decision-making workflows, we help you
-                  eliminate repetitive tasks.
+
+                {/* Benefits */}
+                <div className="bg-gray-900/50 p-10 rounded-2xl border border-gray-800">
+                  <div className="mb-10">
+                    <h4 className="text-2xl font-semibold text-white mb-6">Perfect For:</h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaCheck className="text-purple-500 flex-shrink-0" />
+                        Coaches wanting to scale their impact
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaCheck className="text-purple-500 flex-shrink-0" />
+                        Content creators seeking consistency
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-2xl font-semibold text-white mb-6">Business Impact:</h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        10x more follower engagement
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        30 days of content in one sitting
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        24/7 community management
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center mt-12">
+                <motion.button
+                  className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection('book-call')}
+                >
+                  Learn More About Creator Solutions →
+                </motion.button>
+              </div>
+            </div>
+
+            {/* Internal Efficiency Suite */}
+            <div className="mb-32">
+              <div className="text-center mb-16">
+                <h3 className="text-4xl font-bold text-white mb-6">Internal Efficiency Suite</h3>
+                <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                  Streamline operations and boost productivity with AI-powered automation.
                 </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                {/* Features */}
+                <div className="space-y-8">
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaBook className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2">Company Knowledge Chatbot Agent</h4>
+                      <p className="text-gray-400">Your smart internal assistant for instant answers about processes and policies.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <FaTasks className="w-5 h-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-white mb-2">Personal Assistant Agent</h4>
+                      <p className="text-gray-400">Automates routine tasks from emails to document organization.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Benefits */}
+                <div className="bg-gray-900/50 p-10 rounded-2xl border border-gray-800">
+                  <div className="mb-10">
+                    <h4 className="text-2xl font-semibold text-white mb-6">Perfect For:</h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaCheck className="text-purple-500 flex-shrink-0" />
+                        Teams drowning in repetitive tasks
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaCheck className="text-purple-500 flex-shrink-0" />
+                        Companies looking to scale efficiently
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-2xl font-semibold text-white mb-6">Business Impact:</h4>
+                    <ul className="space-y-4">
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        30+ hours saved per employee monthly
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        50% faster employee onboarding
+                      </li>
+                      <li className="flex items-center gap-4 text-lg text-gray-300">
+                        <FaArrowUp className="text-green-500 flex-shrink-0" />
+                        90% fewer internal support queries
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center mt-12">
+                <motion.button
+                  className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection('book-call')}
+                >
+                  Learn More About Internal Efficiency →
+                </motion.button>
               </div>
             </div>
           </div>
         </div>
 
-
-        {/* Overlapping Your Business At Peak Performance Section */}
-        {/* <motion.div
-          className="relative -mt-16 z-10 w-full flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <motion.div
-            className=" max-w-2xl w-full p-8 backdrop-blur-sm border border-gray-700/50 bg-purple-500/80"
-            whileHover={{ boxShadow: "0 0 30px rgba(147, 51, 234, 0.3)" }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-center  text-white ">
-              Your Business At Peak Performance
-            </h2>
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          className="w-full bg-gray-950 flex items-center justify-center p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-
-          <BusinessFlow />
-        </motion.div> */}
-
-        {/* Comparison Section */}
-        <div id="comparison" className="w-full bg-gray-950 py-24 px-4 z-10">
+        {/* How It Works Section */}
+        <div id="how-it-works" className="w-full bg-gray-950 py-24 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                COMPETITIVE EDGE
+                OUR PROCESS
               </span>
             </div>
 
             <h2 className="text-5xl font-bold text-white mb-6">
-              How do we compare?
+              Simple Implementation, Powerful Results
             </h2>
 
             <p className="text-xl text-gray-400 max-w-3xl mb-20">
-              See why businesses choose MNFST for their AI implementation needs.
+              We handle the complex AI infrastructure while you focus on growing your business.
+              All solutions include strategy development and comprehensive training.
             </p>
 
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="text-left py-4 text-gray-400"></th>
-                    {['FREELANCE', 'IN-HOUSE', 'OTHER AGENCIES', 'MNFST'].map((header, i) => (
-                      <th key={i} className="px-6 py-4">
-                        <div className="flex items-center justify-center gap-2">
-                          <span className="text-white font-bold">{header}</span>
-                          {i === 3 ?
-                            <FaCheck className="text-emerald-500" /> :
-                            <FaTimes className="text-red-500" />
-                          }
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    {
-                      metric: 'Monthly cost',
-                      values: ['$7,000+', '$10,000+', '$10,000+', '$4,900/mo!']
-                    },
-                    {
-                      metric: 'Time to start',
-                      values: ['Days/weeks', 'Weeks/months', 'Weeks/months', '24 hours!']
-                    },
-                    {
-                      metric: 'Expertise level',
-                      values: ['Varies widely', 'Good (hopefully)', 'Rolling the dice', 'AI Experts!']
-                    },
-                    {
-                      metric: 'First delivery',
-                      values: ['Several weeks', 'Several weeks', 'Several weeks', '2-3 days!']
-                    },
-                    {
-                      metric: 'Cancellation',
-                      values: ['Significant', 'Severance + hassle', 'Significant', 'One click!']
-                    }
-                  ].map((row, i) => (
-                    <tr key={i} className="border-b border-gray-800">
-                      <td className="py-6 text-gray-400">{row.metric}</td>
-                      {row.values.map((value, j) => (
-                        <td key={j} className={`px-6 py-6 text-center ${j === 3 ? 'text-purple-400 font-bold' : 'text-gray-300'}`}>
-                          {value}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
+                  1
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Strategy & Planning
+                </h3>
+                <p className="text-gray-400">
+                  We begin with a thorough assessment of your needs and develop a
+                  customized implementation strategy for your chosen solutions.
+                </p>
+              </motion.div>
+
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
+                  2
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Implementation & Integration
+                </h3>
+                <p className="text-gray-400">
+                  Our team handles the technical setup and seamlessly integrates
+                  the AI solutions with your existing systems and workflows.
+                </p>
+              </motion.div>
+
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-500 font-bold mb-6">
+                  3
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Training & Support
+                </h3>
+                <p className="text-gray-400">
+                  We provide comprehensive training for your team and ongoing support
+                  to ensure you get the most out of your AI solutions.
+                </p>
+              </motion.div>
             </div>
           </div>
         </div>
 
         {/* Pricing Section */}
-        <div id="pricing" className="w-full bg-gray-950 py-24 px-4 z-10">
+        <div id="pricing" className="w-full bg-gray-950 py-24 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                PRICING & PLANS
+                PRICING
               </span>
             </div>
 
             <h2 className="text-5xl font-bold text-white mb-6">
-              Your investment
+              Transparent Pricing, Flexible Options
             </h2>
 
             <p className="text-xl text-gray-400 max-w-3xl mb-20">
-              Simple, transparent pricing with no hidden fees. Choose the plan that best fits your needs.
+              Choose between individual solutions or bundled packages. All prices include
+              strategy development, implementation, and training.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Standard Plan */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Individual Solutions */}
               <motion.div
-                whileHover={{ scale: 1.02 }}
                 className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6">Standard</h3>
-                <div className="mb-4">
-                  <span className="text-5xl font-bold text-white">$4,900</span>
-                  <span className="text-gray-400">/month</span>
-                </div>
-                <p className="text-gray-400 mb-8">Billed monthly</p>
-                <motion.button
-                  className="w-full py-3 px-6 rounded-xl border border-gray-700 text-white font-semibold mb-8"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Get started
-                </motion.button>
-                <ul className="space-y-4">
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Unlimited requests
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Unlimited users
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Pause or cancel anytime
-                  </li>
-                </ul>
-              </motion.div>
-
-              {/* Quarterly Plan */}
-              <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="bg-gray-900/50 p-8 rounded-xl border border-gray-800 relative"
               >
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-1 rounded-full text-sm">
-                    POPULAR
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-6">Quarterly</h3>
-                <div className="mb-4">
-                  <span className="text-5xl font-bold text-white">$3,900</span>
-                  <span className="text-gray-400">/month</span>
-                </div>
-                <p className="text-gray-400 mb-8">Commit to 3 months & save $3,000</p>
-                <motion.button
-                  className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold mb-8"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Sign up now →
-                </motion.button>
-                <ul className="space-y-4">
+                <h3 className="text-2xl font-bold text-white mb-4">Individual Solution</h3>
+                <div className="text-4xl font-bold text-white mb-6">$799</div>
+                <p className="text-gray-400 mb-6">Perfect for businesses looking to start with a single automation solution.</p>
+                <ul className="space-y-3 mb-8">
                   <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Unlimited requests
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Instant Onboarding
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Unlimited users
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Strategy Development
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Pause or cancel anytime
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Solution Delivery In Less Than 2 Weeks
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Team Training
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Weekly Sessions
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    30 Days of Support
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Optional Hosting on our secure server ($99/mo)
                   </li>
                 </ul>
-              </motion.div>
-
-              {/* Ad-hoc Plan */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6">Ad-hoc</h3>
-                <div className="mb-4">
-                  <span className="text-5xl font-bold text-white">Custom</span>
-                </div>
-                <p className="text-gray-400 mb-8">For one-off needs, contact sales.</p>
-                <motion.button
-                  className="w-full py-3 px-6 rounded-xl border border-gray-700 text-white font-semibold mb-8"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Contact sales
-                </motion.button>
-                <ul className="space-y-4">
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Documentation with every project
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    45-minute project consultation
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2" />
-                    Discounted subscription transition
-                  </li>
-                </ul>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
-        {/* Consultation Section */}
-        <div id="consultation" className="w-full bg-gray-950 py-24 px-4 z-10">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-4">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                EXPERT GUIDANCE
-              </span>
-            </div>
-
-            <h2 className="text-5xl font-bold text-white mb-6">
-              Build it yourself
-            </h2>
-
-            <p className="text-xl text-gray-400 max-w-3xl mb-20">
-              Need expert guidance to implement AI solutions in-house? Our consultation services provide you with the expertise you need.
-            </p>
-
-            <div className="max-w-3xl mx-auto">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
-              >
-                <div className="flex items-center gap-6 mb-8">
-                  <div className="w-16 h-16 bg-purple-500/20 rounded-lg p-3">
-                    <FaHandshake className="w-full h-full text-purple-500" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Expert Consultation</h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold text-white">$199</span>
-                      <span className="text-gray-400">/hour</span>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="text-gray-400 mb-8">
-                  Want to build your own AI solution? Get expert guidance on both technical implementation
-                  and strategic planning. Our consultation sessions are tailored to your specific needs.
-                </p>
-
-                <ul className="space-y-4 mb-8">
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2 flex-shrink-0" />
-                    Technical architecture & implementation guidance
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2 flex-shrink-0" />
-                    Strategic planning & roadmapping
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2 flex-shrink-0" />
-                    Best practices & potential pitfalls
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-emerald-500 mr-2 flex-shrink-0" />
-                    Resource & timeline planning
-                  </li>
-                </ul>
-
                 <motion.button
                   className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection('book-call')}
                 >
-                  Book Consultation
+                  Get Started
                 </motion.button>
               </motion.div>
-            </div>
-          </div>
-        </div>
 
-        <div id="book-call" className="w-full min-h-screen bg-gray-950 flex items-center justify-center">
-          <div className="w-full max-w-7xl px-4 py-24">
-            <div className="mb-4">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                BOOK A CALL
-              </span>
-            </div>
+              {/* Solution Bundles */}
+              <motion.div
+                className="bg-gray-900/50 p-10 rounded-xl border border-gray-800 lg:scale-105 relative"
+                whileHover={{ scale: 1.07 }}
+              >
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm font-semibold text-white">
+                  MOST POPULAR
+                </div>
 
-            <h2 className="text-5xl font-bold text-white mb-6">
-              Schedule your free consultation
-            </h2>
+                <h3 className="text-2xl font-bold text-white mb-4">Solution Bundles</h3>
+                <div className="text-4xl font-bold text-white mb-6">$1,999</div>
+                <p className="text-gray-400 mb-8">Comprehensive packages designed for specific business needs.</p>
 
-            <p className="text-xl text-gray-400 max-w-3xl mb-12">
-              Book a 30-minute call to discuss your needs and see how we can help automate your business.
-            </p>
+                <div className="space-y-8">
+                  {/* Base Features */}
+                  <div>
 
-            <div className="w-full h-[800px] bg-gray-900/50 p-8 rounded-xl border border-gray-800">
-              <InlineWidget
-                url="https://calendly.com/contact-mnfstagency/30min"
-                styles={{
-                  height: '100%',
-                  width: '100%',
-                  overflow: 'visible'
-                }}
-                pageSettings={{
-                  backgroundColor: '111827',
-                  hideEventTypeDetails: false,
-                  hideLandingPageDetails: false,
-                  primaryColor: '8B5CF6',
-                  textColor: 'FFFFFF'
-                }}
-                prefill={{
-                  email: "",
-                  firstName: "",
-                  lastName: "",
-                  name: "",
-                }}
-              />
+                    <div className="flex items-center text-gray-300 mb-2">
+                      <FaCheck className="text-purple-500 mr-3 flex-shrink-0" />
+                      Everything in the Individual Solution
+                    </div>
+                  </div>
+
+                  {/* Suite Options */}
+                  <div>
+
+                    <div className="flex items-center text-gray-300 mb-2">
+                      <FaCheck className="text-purple-500 mr-3 flex-shrink-0" />
+                      <p className="text-gray-300 mb-2 font-semibold">Choose One Pre-made Suite:</p>
+                    </div>
+                    <div className="pl-6 space-y-6">
+                      {/* Pre-made Suites */}
+
+                      <div>
+
+                        <ul className="space-y-2 pl-4 text-gray-400">
+                          <li>• Engagement Suite</li>
+                          <li>• Creator Solutions</li>
+                          <li>• Internal Efficiency Suite</li>
+                        </ul>
+                      </div>
+
+                      {/* Custom Suite */}
+                      <div>
+                        <p className="text-gray-300 mb-2 font-semibold">OR Create Your Custom Suite:</p>
+                        <p className="text-gray-400 mb-2">Choose any 3 agents:</p>
+                        <ul className="space-y-2 pl-4 text-gray-400">
+                          <li>• Content Creator Agent</li>
+                          <li>• Community Engagement Agent</li>
+                          <li>• AI Twin Agent</li>
+                          <li>• Personal Assistant Agent</li>
+                          <li>• Company Knowledge Chatbot Agent</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-400 italic">
+                    Not sure which option is best? We'll help you choose during your strategy session.
+                  </p>
+                </div>
+
+                <motion.button
+                  className="w-full py-4 px-6 mt-8 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection('book-call')}
+                >
+                  Get Started
+                </motion.button>
+              </motion.div>
+
+              {/* Enterprise Package */}
+              <motion.div
+                className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
+                whileHover={{ scale: 1.02 }}
+              >
+                <h3 className="text-2xl font-bold text-white mb-4">Enterprise Package</h3>
+                <div className="text-4xl font-bold text-white mb-6">$4,999</div>
+                <p className="text-gray-400 mb-6">Complete IT infrastructure with custom website development.</p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Everything in the Individual Solution and Solution Bundles
+                  </li>
+
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Custom Website Development
+                  </li>
+
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Unlimited Number of Agents specific to your needs
+                  </li>
+
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Technical Planning
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    60 Days Priority Support
+                  </li>
+
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Enhanced Training
+                  </li>
+
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Weekly Strategy Sessions
+                  </li>
+
+                  <li className="flex items-center text-gray-300">
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    Comprehensive Integration
+                  </li>
+                </ul>
+                <motion.button
+                  className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection('book-call')}
+                >
+                  Get Started
+                </motion.button>
+              </motion.div>
             </div>
           </div>
         </div>
 
         {/* FAQ Section */}
-        <div id="faq" className="w-full bg-gray-950 py-24 px-4 z-10">
+        <div id="faq" className="w-full bg-gray-950 py-24 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                QUICK ANSWERS
+                FAQ
               </span>
             </div>
 
             <h2 className="text-5xl font-bold text-white mb-6">
-              Common questions
+              Common Questions
             </h2>
 
             <p className="text-xl text-gray-400 max-w-3xl mb-20">
-              Everything you need to know about our AI solutions and how we work.
+              Everything you need to know about our AI solutions and implementation process.
             </p>
 
             <div className="max-w-3xl">
               {[
                 {
-                  question: "How long does it take to implement AI solutions?",
-                  answer: "Implementation time varies based on the complexity of your needs. Simple automations can be ready in 2-4 weeks, while complex custom solutions might take 2-3 months."
+                  question: "What's included in the implementation process?",
+                  answer: "Our implementation process includes strategy development, technical setup, system integration, comprehensive team training, and post-launch support. We ensure your team is fully equipped to leverage the AI solutions effectively."
                 },
                 {
-                  question: "What kind of ROI can I expect?",
-                  answer: "Our clients typically see ROI within 3-6 months. This includes cost savings from automation and revenue increases from improved efficiency."
+                  question: "How long does implementation take?",
+                  answer: "Individual solutions typically take 2-4 weeks to implement. Bundle implementations usually take 4-6 weeks. Enterprise packages with custom website development can take 8-12 weeks. Timelines may vary based on complexity and customization needs."
                 },
                 {
-                  question: "Do I need technical expertise to use your solutions?",
-                  answer: "No, we design our solutions to be user-friendly and provide full training and support for your team."
+                  question: "Do I need technical expertise to use these solutions?",
+                  answer: "No technical expertise is required. We design our solutions to be user-friendly and provide comprehensive training for your team. Our support team is always available to help with any questions."
                 },
                 {
-                  question: "How do you ensure data security?",
-                  answer: "We implement enterprise-grade security measures and comply with industry standards like GDPR and SOC 2."
+                  question: "What are the hosting options?",
+                  answer: "Solutions can be hosted on your own server or on MNFST's secure server for $100/month. Both options include maintenance and security updates. The choice of hosting doesn't affect functionality."
+                },
+                {
+                  question: "Can I customize the solutions for my specific needs?",
+                  answer: "Yes, all our solutions can be customized to match your specific business needs and workflows. We'll work with you during the strategy phase to ensure the implementation aligns with your requirements."
+                },
+                {
+                  question: "What kind of support do you provide?",
+                  answer: "We provide comprehensive support including implementation assistance, team training, technical support, and ongoing maintenance. Bundle and Enterprise customers receive priority support access."
                 }
               ].map((faq, index) => (
                 <Accordion key={index} faq={faq} />
@@ -592,7 +871,90 @@ function App() {
           </div>
         </div>
 
+        {/* Consultation Booking Section */}
+        <div id="book-call" className="w-full bg-gray-950 py-24 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-4">
+              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
+                GET STARTED
+              </span>
+            </div>
 
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <div>
+                <h2 className="text-5xl font-bold text-white mb-6">
+                  Book Your Strategy Session
+                </h2>
+
+                <p className="text-xl text-gray-400 mb-8">
+                  Schedule a consultation to discuss your needs and discover how our AI solutions
+                  can transform your business operations.
+                </p>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <FaClock className="w-6 h-6 text-purple-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">30-Minute Deep Dive</h3>
+                      <p className="text-gray-400">
+                        A focused session to understand your needs and recommend the best solutions for your business.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <FaChartLine className="w-6 h-6 text-purple-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Strategic Planning</h3>
+                      <p className="text-gray-400">
+                        Get a clear implementation roadmap and understand how our solutions will impact your business.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <FaDollarSign className="w-6 h-6 text-purple-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Custom Quote</h3>
+                      <p className="text-gray-400">
+                        Receive a detailed quote tailored to your specific needs and implementation requirements.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-800">
+                <InlineWidget
+                  url="https://calendly.com/contact-mnfstagency/30min"
+                  styles={{
+                    height: '700px',
+                    width: '100%',
+                  }}
+                  pageSettings={{
+                    backgroundColor: '111827',
+                    hideEventTypeDetails: false,
+                    hideLandingPageDetails: false,
+                    primaryColor: '8B5CF6',
+                    textColor: 'FFFFFF'
+                  }}
+                  prefill={{
+                    email: "",
+                    firstName: "",
+                    lastName: "",
+                    name: "",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Footer */}
         <footer className="bg-gray-950 text-white py-16 border-t border-gray-800 z-10">

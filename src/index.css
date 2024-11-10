@@ -68,3 +68,59 @@ html, body {
     box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3); /* purple-500 with opacity */
   }
 }
+/* Add to your CSS */
+.slick-slide > div {
+  margin: 0 15px;
+}
+
+.slick-list {
+  margin: 0 -15px;
+}
+
+.slick-prev,
+.slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -10px;
+}
+
+.slick-next {
+  right: -10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 40px;
+  color: #A855F7;
+  opacity: 0.75;
+}
+
+.slick-dots li button:before {
+  color: #A855F7;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #A855F7;
+}
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.logo-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.logo-scroll:hover {
+  animation-play-state: paused;
+}
