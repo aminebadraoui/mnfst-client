@@ -81,9 +81,11 @@ function App() {
 
 
             <h1 className="text-5xl md:text-7xl font-bold mb-8">
-              <span className="text-white">Transform Your Business With </span>
+              <span className="text-white">We Make </span>
+              <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent"> AI </span>
+              <span className="text-white">Work For </span>
               <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-                Intelligent Automation
+                You
               </span>
             </h1>
 
