@@ -68,45 +68,42 @@ html, body {
     box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3); /* purple-500 with opacity */
   }
 }
-/* Add to your CSS */
-.slick-slide > div {
-  margin: 0 15px;
-}
 
-.slick-list {
-  margin: 0 -15px;
-}
-
+/* Add or update these styles in your CSS */
 .slick-prev,
 .slick-next {
-  width: 40px;
-  height: 40px;
-  z-index: 1;
+  width: 48px;
+  height: 48px;
+  z-index: 10;
 }
 
 .slick-prev {
-  left: -10px;
+  left: -20px !important; /* Adjust this value to position the left arrow */
 }
 
 .slick-next {
-  right: -10px;
+  right: 10px !important; /* Adjust this value to position the right arrow */
 }
 
 .slick-prev:before,
 .slick-next:before {
-  font-size: 40px;
-  color: #A855F7;
-  opacity: 0.75;
+  color: #A855F7 !important;
+  font-size: 48px !important;
 }
 
-.slick-dots li button:before {
-  color: #A855F7;
+/* Remove default arrow background and hover states */
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+  background: transparent !important;
 }
 
-.slick-dots li.slick-active button:before {
+.slick-prev,
+.slick-next:before {
+  opacity: 1;
   color: #A855F7;
 }
-
 
 @keyframes scroll {
   0% {

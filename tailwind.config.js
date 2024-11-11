@@ -13,6 +13,9 @@ module.exports = {
       colors: {
         primary: colors.purple,
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [
