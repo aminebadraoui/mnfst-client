@@ -12,7 +12,7 @@ const logos = [
 
 const LogoScroll = () => {
     return (
-        <div className="relative w-full overflow-hidden bg-gray-950/50 backdrop-blur-sm py-10 ">
+        <div className="relative w-full overflow-hidden bg-transparent backdrop-blur-sm py-10 ">
             <div className="flex">
 
 

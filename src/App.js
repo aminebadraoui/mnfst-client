@@ -29,7 +29,10 @@ import {
   FaHeadset,
   FaUser,
   FaChevronLeft,
-  FaChevronRight
+  FaChevronRight,
+  FaComments,
+  FaBrain,
+  FaTimes
 
 } from 'react-icons/fa';
 
@@ -95,7 +98,7 @@ const settings = {
 const agents = [
   {
     icon: FaMagnet,
-    title: "Lead Generation Agent",
+    title: "Client Acquisition Agent",
     description: "Converts website visitors into qualified leads 24/7.",
     features: [
       "Books meetings automatically",
@@ -129,25 +132,6 @@ const agents = [
       "90% faster response times",
       "75% reduction in support costs",
       "24/7 customer satisfaction"
-    ]
-  },
-  {
-    icon: FaUserCircle,
-    title: "AI Twin Agent",
-    description: "Scale your presence without scaling your time.",
-    features: [
-      "Engages with your audience",
-      "Provides personalized guidance"
-    ],
-    perfectFor: [
-      "Coaches and consultants",
-      "Thought leaders and influencers",
-      "Experts wanting to scale"
-    ],
-    impact: [
-      "Engage with 10x more followers",
-      "80% time saved on responses",
-      "24/7 audience engagement"
     ]
   },
   {
@@ -234,15 +218,15 @@ function App() {
       <div className='bg-transparent fixed top-0 left-0 bottom-0 right-0 pointer-events-none'>
         <TechLoader />
       </div>
-      <div className="app  bg-gray-950 w-full h-full z-10">
+      <div className="app  bg-gray-900 w-full h-full z-10">
         <Header />
 
         {/* Hero Section */}
-        <div id="hero" className="min-h-screen bg-gray-950 flex flex-col items-center justify-between p-4 mb-8">
+        <div id="hero" className="min-h-screen bg-gray-900 flex flex-col items-center justify-between p-4 mb-8">
           <div className="mt-40 text-center max-w-5xl mx-auto">
 
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-8">
+            <h1 className="text-5xl md:text-7xl font-semibold mb-8">
               <span className="text-white">We Make </span>
               <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent"> AI </span>
               <span className="text-white">Work For </span>
@@ -276,87 +260,64 @@ function App() {
               </motion.button>
             </div>
           </div>
+
           <LogoScroll />
         </div>
 
         {/* Our Agents Section */}
-        <div id="solutions" className="w-full bg-gray-950 p-4 mb-16">
+        <div className="w-full bg-gray-900 p-4 py-24">
           <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              {/* Remove text-center class */}
+            <div className="mb-16">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                MEET YOUR AI TEAM
+                YOUR AI WORKFORCE
               </span>
-              <h2 className="text-5xl font-bold text-white mt-6 mb-6">
-                AI Agents That Work For You 24/7
+              <h2 className="text-5xl font-semibold text-white mt-6 mb-6">
+                Six Powerful AI Agents
               </h2>
               <p className="text-xl text-gray-400 max-w-3xl">
-                Your tireless digital workforce that handles tasks while you focus on growth
+                A complete suite of AI solutions to transform your business operations
               </p>
             </div>
 
-            <div className="relative">
-              <Slider {...settings}>
-                {agents.map((agent, index) => (
-                  <div key={index} className="bg-gray-900/80 p-12 rounded-xl border border-gray-800">
-                    <div className="grid grid-cols-2 gap-24">
-                      {/* Left Column */}
-                      <div>
-                        <div className="w-16 h-16 rounded-xl bg-purple-500/20 flex items-center justify-center mb-8">
-                          <agent.icon className="w-8 h-8 text-purple-500" />
-                        </div>
-                        <h3 className="text-3xl font-bold text-white mb-4">{agent.title}</h3>
-                        <p className="text-xl text-gray-400 mb-12">{agent.description}</p>
-
-                        <div>
-                          <h4 className="text-xl font-semibold text-white mb-6">Key Features:</h4>
-                          <ul className="space-y-4">
-                            {agent.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-center gap-4 text-lg text-gray-300">
-                                <FaCheck className="text-green-500 flex-shrink-0 w-5 h-5" />
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-
-                      {/* Right Column */}
-                      <div className="space-y-12">
-                        <div>
-                          <h4 className="text-xl font-semibold text-white mb-6">Perfect For:</h4>
-                          <ul className="space-y-4">
-                            {agent.perfectFor.map((item, idx) => (
-                              <li key={idx} className="flex items-center gap-4 text-lg text-gray-300">
-                                <FaUser className="text-purple-500 flex-shrink-0 w-5 h-5" />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div>
-                          <h4 className="text-xl font-semibold text-white mb-6">Business Impact:</h4>
-                          <ul className="space-y-4">
-                            {agent.impact.map((impact, idx) => (
-                              <li key={idx} className="flex items-center gap-4 text-lg text-gray-300">
-                                <FaArrowUp className="text-green-500 flex-shrink-0 w-5 h-5" />
-                                {impact}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
+            <div className="space-y-6">
+              {agents.map((agent, index) => (
+                <Accordion key={index} title={agent.title}>
+                  <div className="flex items-start gap-6">
+                    {/* <div className="w-1/3">
+                      <img src={`/images/${agent.title.toLowerCase().replace(/ /g, '-')}.jpg`} alt={agent.title} className="rounded-lg shadow-lg" />
+                    </div> */}
+                    <div className="w-2/3">
+                      <p className="text-lg text-gray-400 mb-4">{agent.description}</p>
+                      <h4 className="text-xl font-semibold text-white mb-2">Key Features:</h4>
+                      <ul className="list-disc pl-5 text-gray-400 mb-4">
+                        {agent.features.map((feature, idx) => (
+                          <li key={idx}>{feature}</li>
+                        ))}
+                      </ul>
+                      <h4 className="text-xl font-semibold text-white mb-2">Perfect For:</h4>
+                      <ul className="list-disc pl-5 text-gray-400 mb-4">
+                        {agent.perfectFor.map((item, idx) => (
+                          <li key={idx}>{item}</li>
+                        ))}
+                      </ul>
+                      <h4 className="text-xl font-semibold text-white mb-2">Business Impact:</h4>
+                      <ul className="list-disc pl-5 text-gray-400">
+                        {agent.impact.map((impact, idx) => (
+                          <li key={idx}>{impact}</li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
-                ))}
-              </Slider>
+                </Accordion>
+              ))}
             </div>
           </div>
         </div>
 
+
+
         {/* How It Works Section */}
-        <div id="how-it-works" className="w-full bg-gray-950 p-4 mb-16 relative">
+        <div id="how-it-works" className="w-full bg-gray-900 p-4 mb-16 relative">
           {/* Background Image - Add a dark overlay */}
 
 
@@ -365,7 +326,7 @@ function App() {
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
                 HOW IT WORKS
               </span>
-              <h2 className="text-5xl font-bold text-white mt-6 mb-6">
+              <h2 className="text-5xl font-semibold text-white mt-6 mb-6">
                 Simple Implementation Process
               </h2>
               <p className="text-xl text-gray-400 max-w-3xl ">
@@ -395,7 +356,7 @@ function App() {
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-purple-500 mb-2">STEP 1</div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Onboarding</h3>
+                    <h3 className="text-2xl font-semibold text-white mb-4">Onboarding</h3>
                     <p className="text-gray-400 text-lg">
                       Onboarding takes just 30 minutes and it's the only mandatory call in our service.
                       We can set one up as soon as tomorrow.
@@ -410,7 +371,7 @@ function App() {
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-purple-500 mb-2">STEP 2</div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Add Projects</h3>
+                    <h3 className="text-2xl font-semibold text-white mb-4">Add Projects</h3>
                     <p className="text-gray-400 text-lg">
                       We use a simple, self-directed ClickUp board to manage work. You can add projects,
                       leave comments, and view progress—or let us add tasks for you.
@@ -425,7 +386,7 @@ function App() {
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-purple-500 mb-2">STEP 3</div>
-                    <h3 className="text-2xl font-bold text-white mb-4">Weekly Consultations</h3>
+                    <h3 className="text-2xl font-semibold text-white mb-4">Weekly Consultations</h3>
                     <p className="text-gray-400 text-lg">
                       Ops is an ongoing process. We provide (optional) weekly 45-minute consultations
                       for brainstorming & discussion.
@@ -437,8 +398,102 @@ function App() {
           </div>
         </div>
 
+        {/* Comparison Section */}
+        <div className="w-full bg-gray-900 p-4 py-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-16">
+              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
+                COMPARISON
+              </span>
+              <h2 className="text-5xl font-semibold text-white mt-6 mb-6">
+                How do we compare?
+              </h2>
+            </div>
+
+            <div className="relative overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="p-4 text-left text-gray-400"></th>
+                    <th className="p-4 text-center">
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="text-xl text-gray-400">Traditional VA</span>
+                        <FaTimes className="text-red-500 w-6 h-6" />
+                      </div>
+                    </th>
+                    <th className="p-4 text-center">
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="text-xl text-gray-400">In-House Team</span>
+                        <FaTimes className="text-red-500 w-6 h-6" />
+                      </div>
+                    </th>
+                    <th className="p-4 text-center">
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="text-xl text-gray-400">MNFST AI</span>
+                        <FaCheck className="text-green-500 w-6 h-6" />
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-gray-800">
+                    <td className="p-4 text-white">Monthly cost</td>
+                    <td className="p-4 text-center text-gray-400">$2,000+</td>
+                    <td className="p-4 text-center text-gray-400">$8,000+</td>
+                    <td className="p-4 text-center">
+                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
+                        Starting at $990
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="p-4 text-white">Availability</td>
+                    <td className="p-4 text-center text-gray-400">8 hours/day</td>
+                    <td className="p-4 text-center text-gray-400">8 hours/day</td>
+                    <td className="p-4 text-center">
+                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
+                        24/7
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="p-4 text-white">Response time</td>
+                    <td className="p-4 text-center text-gray-400">Hours/days</td>
+                    <td className="p-4 text-center text-gray-400">Hours</td>
+                    <td className="p-4 text-center">
+                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
+                        Seconds
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="p-4 text-white">Scalability</td>
+                    <td className="p-4 text-center text-gray-400">Limited</td>
+                    <td className="p-4 text-center text-gray-400">Expensive</td>
+                    <td className="p-4 text-center">
+                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
+                        Unlimited
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="p-4 text-white">Setup time</td>
+                    <td className="p-4 text-center text-gray-400">Weeks</td>
+                    <td className="p-4 text-center text-gray-400">Months</td>
+                    <td className="p-4 text-center">
+                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
+                        24 hours
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         {/* Pricing Section */}
-        <div id="pricing" className="w-full bg-gray-950 p-4 mb-16">
+        <div id="pricing" className="w-full bg-gray-900 p-4 mb-16">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 py-2 rounded-full">
@@ -446,7 +501,7 @@ function App() {
               </span>
             </div>
 
-            <h2 className="text-5xl font-bold text-white mb-6">
+            <h2 className="text-5xl font-semibold text-white mb-6">
               Transparent Pricing, Flexible Options
             </h2>
 
@@ -461,7 +516,7 @@ function App() {
                 className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
                 whileHover={{ scale: 1.02 }}
               >
-                <h3 className="text-2xl font-bold text-purple-500 mb-4">Individual Solution</h3>
+                <h3 className="text-2xl font-semibold text-purple-500 mb-4">Individual Solution</h3>
                 <div className="text-3xl font-regular text-slate-50 mb-6">$990</div>
                 <p className="text-gray-400 mb-6">Perfect for businesses looking to start with a single automation solution.</p>
                 <ul className="space-y-3 mb-8">
@@ -517,7 +572,7 @@ function App() {
                   MOST POPULAR
                 </div>
 
-                <h3 className="text-2xl font-bold text-purple-500 mb-4">Bundle Solution</h3>
+                <h3 className="text-2xl font-semibold text-purple-500 mb-4">Bundle Solution</h3>
                 <div className="text-3xl font-regular text-slate-50 mb-6">$1,990</div>
                 <p className="text-gray-400 mb-8">Comprehensive packages designed for specific business needs.</p>
 
@@ -535,7 +590,7 @@ function App() {
                     <div className="space-y-6 mb-8">
                       <div>
                         <div className="flex items-center text-gray-300 mb-2">
-                          <FaCheck className="text-purple-500 mr-3 flex-shrink-0" />
+                          <FaCheck className="text-purple-500 mr-3 flex-shrink-0 font-bold" />
                           3 AI Agents from:
                         </div>
                         <ul className="space-y-2 pl-4 text-gray-400">
@@ -570,7 +625,7 @@ function App() {
                 className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
                 whileHover={{ scale: 1.02 }}
               >
-                <h3 className="text-2xl font-bold text-purple-500 mb-4">Enterprise Solution</h3>
+                <h3 className="text-2xl font-semibold text-purple-500 mb-4">Enterprise Solution</h3>
                 <div className="text-3xl font-regular text-slate-50 mb-6">$4,990</div>
                 <p className="text-gray-400 mb-6">Complete IT infrastructure with custom website development.</p>
                 <ul className="space-y-3 mb-8">
@@ -580,23 +635,22 @@ function App() {
                   </li>
 
                   <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Custom Website Development
-                  </li>
-
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
+                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0 font-bold" />
                     Unlimited Number of Agents specific to your needs
                   </li>
 
                   <li className="flex items-center text-gray-300">
                     <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Technical Planning
+                    Custom Website Development
                   </li>
+
+
+
                   <li className="flex items-center text-gray-300">
                     <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    60 Days Priority Support
+                    Technical Planning
                   </li>
+
 
                   <li className="flex items-center text-gray-300">
                     <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
@@ -627,7 +681,7 @@ function App() {
         </div>
 
         {/* FAQ Section */}
-        <div id="faq" className="w-full bg-gray-950 p-4 mb-16">
+        <div id="faq" className="w-full bg-gray-900 p-4 mb-16">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
@@ -635,7 +689,7 @@ function App() {
               </span>
             </div>
 
-            <h2 className="text-5xl font-bold text-white mb-8">
+            <h2 className="text-5xl font-semibold text-white mb-8">
               Common Questions
             </h2>
 
@@ -677,7 +731,7 @@ function App() {
         </div>
 
         {/* Consultation Booking Section */}
-        <div id="book-call" className="w-full bg-gray-950 p-4 mb-16">
+        <div id="book-call" className="w-full bg-gray-900 p-4 mb-16">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
@@ -687,7 +741,7 @@ function App() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               <div>
-                <h2 className="text-5xl font-bold text-white mb-6">
+                <h2 className="text-5xl font-semibold text-white mb-6">
                   Book Your Strategy Session
                 </h2>
 
@@ -702,7 +756,7 @@ function App() {
                       <FaClock className="w-6 h-6 text-purple-500" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">30-Minute Deep Dive</h3>
+                      <h3 className="text-xl font-semibold text-white mb-2">30-Minute Deep Dive</h3>
                       <p className="text-gray-400">
                         A focused session to understand your needs and recommend the best solutions for your business.
                       </p>
@@ -714,7 +768,7 @@ function App() {
                       <FaChartLine className="w-6 h-6 text-purple-500" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Strategic Planning</h3>
+                      <h3 className="text-xl font-semibold text-white mb-2">Strategic Planning</h3>
                       <p className="text-gray-400">
                         Get a clear implementation roadmap and understand how our solutions will impact your business.
                       </p>
@@ -726,7 +780,7 @@ function App() {
                       <FaDollarSign className="w-6 h-6 text-purple-500" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">Custom Quote</h3>
+                      <h3 className="text-xl font-semibold text-white mb-2">Custom Quote</h3>
                       <p className="text-gray-400">
                         Receive a detailed quote tailored to your specific needs and implementation requirements.
                       </p>
@@ -762,12 +816,12 @@ function App() {
         </div>
 
         {/* Footer */}
-        <footer className="bg-gray-950 text-white py-16 border-t border-gray-800 z-10">
+        <footer className="bg-gray-900 text-white py-16 border-t border-gray-800 z-10">
           <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
               <div className="flex items-center mb-6">
 
-                <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
+                <span className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
                   MNFST
                 </span>
               </div>
@@ -777,7 +831,7 @@ function App() {
             </div>
 
             <div>
-              <h4 className="text-lg font-bold mb-4">Services</h4>
+              <h4 className="text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>Consulting</li>
                 <li>AI Development</li>
@@ -787,7 +841,7 @@ function App() {
             </div>
 
             <div>
-              <h4 className="text-lg font-bold mb-4">Company</h4>
+              <h4 className="text-lg font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>About Us</li>
                 <li>Case Studies</li>
@@ -797,7 +851,7 @@ function App() {
             </div>
 
             <div>
-              <h4 className="text-lg font-bold mb-4">Connect</h4>
+              <h4 className="text-lg font-semibold mb-4">Connect</h4>
               <div className="flex space-x-4">
                 <FaLinkedin className="text-2xl text-gray-400 hover:text-purple-500 cursor-pointer" />
                 <FaTwitter className="text-2xl text-gray-400 hover:text-purple-500 cursor-pointer" />
