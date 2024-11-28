@@ -38,7 +38,8 @@ import {
 
 import LogoScroll from './components/LogoScroll'
 import Accordion from './components/Accordion'
-import { InlineWidget } from "react-calendly";
+
+import Cal, { getCalApi } from "@calcom/embed-react";
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
@@ -731,6 +732,7 @@ function App() {
         </div>
 
         {/* Consultation Booking Section */}
+        {/* Consultation Booking Section */}
         <div id="book-call" className="w-full bg-gray-900 p-4 mb-16">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
@@ -790,24 +792,21 @@ function App() {
               </div>
 
               <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-800">
-                <InlineWidget
-                  url="https://calendly.com/contact-mnfstagency/30min"
-                  styles={{
-                    height: '700px',
-                    width: '100%',
+                <Cal
+                  calLink="mnfst-ai/discovery-call"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    overflow: "scroll"
                   }}
-                  pageSettings={{
-                    backgroundColor: '111827',
+                  config={{
+                    layout: "month_view",
                     hideEventTypeDetails: false,
-                    hideLandingPageDetails: false,
-                    primaryColor: '8B5CF6',
-                    textColor: 'FFFFFF'
-                  }}
-                  prefill={{
-                    email: "",
-                    firstName: "",
-                    lastName: "",
-                    name: "",
+                    styles: {
+                      branding: {
+                        brandColor: "#8B5CF6"
+                      }
+                    }
                   }}
                 />
               </div>

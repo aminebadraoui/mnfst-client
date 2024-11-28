@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@calcom/embed-react": "^1.5.1",
     "@emailjs/browser": "^4.4.1",
     "@hookform/resolvers": "^3.9.1",
     "@tabler/icons-react": "^3.19.0",

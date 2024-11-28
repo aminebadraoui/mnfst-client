@@ -1,6 +1,22 @@
-import { InlineWidget } from "react-calendly";
+import Cal, { getCalApi } from "@calcom/embed-react";
+import { useEffect } from "react";
 
 const CalendlyInline = () => {
+    useEffect(() => {
+        (async function () {
+            const cal = await getCalApi();
+            cal("ui", {
+                styles: {
+                    branding: {
+                        brandColor: "#8B5CF6"
+                    }
+                },
+                hideEventTypeDetails: false,
+                layout: "month_view"
+            });
+        })();
+    }, []);
+
     return (
         <div id="book-call" className="w-full bg-gray-950 py-24 px-4">
             <div className="max-w-7xl mx-auto">
@@ -19,17 +35,15 @@ const CalendlyInline = () => {
                 </p>
 
                 <div className="max-w-4xl mx-auto bg-gray-900/50 p-8 rounded-xl border border-gray-800">
-                    <InlineWidget
-                        url="https://calendly.com/your-link"
-                        styles={{
-                            height: '700px',
-                            width: '100%',
+                    <Cal
+                        calLink="mnfst-ai/discovery-call"
+                        style={{
+                            width: "100%",
+                            height: "700px",
+                            overflow: "scroll"
                         }}
-                        prefill={{
-                            email: "",
-                            firstName: "",
-                            lastName: "",
-                            name: "",
+                        config={{
+                            layout: "month_view"
                         }}
                     />
                 </div>
