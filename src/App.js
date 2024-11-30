@@ -243,158 +243,18 @@ function App() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <motion.button
-                onClick={() => scrollToSection('solutions')}
+                onClick={() => scrollToSection('book-call')}
                 className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-xl"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Explore Solutions →
-              </motion.button>
-
-              <motion.button
-                className="px-8 py-4 border border-gray-700 text-white font-semibold rounded-xl"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('pricing')}
-              >
-                View Pricing
+                Let's Work Together →
               </motion.button>
             </div>
           </div>
 
           <LogoScroll />
         </div>
-        {/* How It Works Section */}
-        <div id="how-it-works" className="w-full bg-gray-900 p-4 mb-16 relative">
-          {/* Background Image - Add a dark overlay */}
-
-
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="text-left mb-8">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                HOW IT WORKS
-              </span>
-              <h2 className="text-5xl font-semibold text-white mt-6 mb-6">
-                Simple Implementation Process
-              </h2>
-              <p className="text-xl text-gray-400 max-w-3xl ">
-                Get started quickly with our streamlined onboarding process
-              </p>
-            </div>
-
-            <div className="w-full relative p-8">
-              <div
-                className="absolute inset-0 bg-cover bg-center z-0"
-                style={{
-                  backgroundImage: 'url(/process-bg.jpg)',
-                  opacity: 0.1
-                }}
-              />
-
-              {/* Timeline Steps */}
-              <div className="relative ">
-
-                {/* Vertical Line */}
-                <div className="absolute left-[25px] top-0 bottom-0 w-[2px] bg-purple-500/30" />
-
-                {/* Step 1 */}
-                <div className="relative pl-20 pb-16">
-                  <div className="absolute left-0 w-[52px] h-[52px] rounded-full bg-purple-500/20 border-2 border-purple-500 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-purple-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-purple-500 mb-2">STEP 1</div>
-                    <h3 className="text-2xl font-semibold text-white mb-4">Onboarding</h3>
-                    <p className="text-gray-400 text-lg">
-                      Onboarding takes just 30 minutes and it's the only mandatory call in our service.
-                      We can set one up as soon as tomorrow.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 2 */}
-                <div className="relative pl-20 pb-16">
-                  <div className="absolute left-0 w-[52px] h-[52px] rounded-full bg-purple-500/20 border-2 border-purple-500 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-purple-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-purple-500 mb-2">STEP 2</div>
-                    <h3 className="text-2xl font-semibold text-white mb-4">Add Projects</h3>
-                    <p className="text-gray-400 text-lg">
-                      We use a simple, self-directed ClickUp board to manage work. You can add projects,
-                      leave comments, and view progress—or let us add tasks for you.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 3 */}
-                <div className="relative pl-20">
-                  <div className="absolute left-0 w-[52px] h-[52px] rounded-full bg-purple-500/20 border-2 border-purple-500 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-purple-500" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-purple-500 mb-2">STEP 3</div>
-                    <h3 className="text-2xl font-semibold text-white mb-4">Weekly Consultations</h3>
-                    <p className="text-gray-400 text-lg">
-                      Ops is an ongoing process. We provide (optional) weekly 45-minute consultations
-                      for brainstorming & discussion.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* FAQ Section */}
-        {/* <div id="faq" className="w-full bg-gray-900 p-4 mb-16">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-4">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                FAQ
-              </span>
-            </div>
-
-            <h2 className="text-5xl font-semibold text-white mb-8">
-              Common Questions
-            </h2>
-
-            <p className="text-xl text-gray-400 max-w-3xl mb-8">
-              Everything you need to know about our AI solutions and implementation process.
-            </p>
-
-            <div className="max-w-3xl">
-              {[
-                {
-                  question: "What's included in the implementation process?",
-                  answer: "Our implementation process includes strategy development, technical setup, system integration, comprehensive team training, and post-launch support. We ensure your team is fully equipped to leverage the AI solutions effectively."
-                },
-                {
-                  question: "How long does implementation take?",
-                  answer: "Individual solutions typically take 2-4 weeks to implement. Bundle implementations usually take 4-6 weeks. Enterprise packages with custom website development can take 8-12 weeks. Timelines may vary based on complexity and customization needs."
-                },
-                {
-                  question: "Do I need technical expertise to use these solutions?",
-                  answer: "No technical expertise is required. We design our solutions to be user-friendly and provide comprehensive training for your team. Our support team is always available to help with any questions."
-                },
-                {
-                  question: "What are the hosting options?",
-                  answer: "Solutions can be hosted on your own server or on MNFST's secure server for $100/month. Both options include maintenance and security updates. The choice of hosting doesn't affect functionality."
-                },
-                {
-                  question: "Can I customize the solutions for my specific needs?",
-                  answer: "Yes, all our solutions can be customized to match your specific business needs and workflows. We'll work with you during the strategy phase to ensure the implementation aligns with your requirements."
-                },
-                {
-                  question: "What kind of support do you provide?",
-                  answer: "We provide comprehensive support including implementation assistance, team training, technical support, and ongoing maintenance. Bundle and Enterprise customers receive priority support access."
-                }
-              ].map((faq, index) => (
-                <Accordion key={index} faq={faq} />
-              ))}
-            </div>
-          </div>
-        </div> */}
 
         {/* Consultation Booking Section */}
         <div id="book-call" className="w-full bg-gray-900 p-4 mb-16">

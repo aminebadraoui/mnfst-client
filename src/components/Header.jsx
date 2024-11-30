@@ -23,11 +23,8 @@ const Header = () => {
                 <div className="flex items-center justify-between">
 
                     <div className="flex items-center space-x-8">
-                        <div className="w-16 h-16 m-4">
-                            <Logo className="w-full h-full" size={20} />
-                        </div>
                         <span className=" text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
-                            MNFST
+                            MNFST AI
                         </span>
                     </div>
 
