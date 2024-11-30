@@ -264,59 +264,6 @@ function App() {
 
           <LogoScroll />
         </div>
-
-        {/* Our Agents Section */}
-        <div className="w-full bg-gray-900 p-4 py-24">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-16">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                YOUR AI WORKFORCE
-              </span>
-              <h2 className="text-5xl font-semibold text-white mt-6 mb-6">
-                Six Powerful AI Agents
-              </h2>
-              <p className="text-xl text-gray-400 max-w-3xl">
-                A complete suite of AI solutions to transform your business operations
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {agents.map((agent, index) => (
-                <Accordion key={index} title={agent.title}>
-                  <div className="flex items-start gap-6">
-                    {/* <div className="w-1/3">
-                      <img src={`/images/${agent.title.toLowerCase().replace(/ /g, '-')}.jpg`} alt={agent.title} className="rounded-lg shadow-lg" />
-                    </div> */}
-                    <div className="w-2/3">
-                      <p className="text-lg text-gray-400 mb-4">{agent.description}</p>
-                      <h4 className="text-xl font-semibold text-white mb-2">Key Features:</h4>
-                      <ul className="list-disc pl-5 text-gray-400 mb-4">
-                        {agent.features.map((feature, idx) => (
-                          <li key={idx}>{feature}</li>
-                        ))}
-                      </ul>
-                      <h4 className="text-xl font-semibold text-white mb-2">Perfect For:</h4>
-                      <ul className="list-disc pl-5 text-gray-400 mb-4">
-                        {agent.perfectFor.map((item, idx) => (
-                          <li key={idx}>{item}</li>
-                        ))}
-                      </ul>
-                      <h4 className="text-xl font-semibold text-white mb-2">Business Impact:</h4>
-                      <ul className="list-disc pl-5 text-gray-400">
-                        {agent.impact.map((impact, idx) => (
-                          <li key={idx}>{impact}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </Accordion>
-              ))}
-            </div>
-          </div>
-        </div>
-
-
-
         {/* How It Works Section */}
         <div id="how-it-works" className="w-full bg-gray-900 p-4 mb-16 relative">
           {/* Background Image - Add a dark overlay */}
@@ -399,290 +346,8 @@ function App() {
           </div>
         </div>
 
-        {/* Comparison Section */}
-        <div className="w-full bg-gray-900 p-4 py-24">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-16">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
-                COMPARISON
-              </span>
-              <h2 className="text-5xl font-semibold text-white mt-6 mb-6">
-                How do we compare?
-              </h2>
-            </div>
-
-            <div className="relative overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="p-4 text-left text-gray-400"></th>
-                    <th className="p-4 text-center">
-                      <div className="flex flex-col items-center gap-2">
-                        <span className="text-xl text-gray-400">Traditional VA</span>
-                        <FaTimes className="text-red-500 w-6 h-6" />
-                      </div>
-                    </th>
-                    <th className="p-4 text-center">
-                      <div className="flex flex-col items-center gap-2">
-                        <span className="text-xl text-gray-400">In-House Team</span>
-                        <FaTimes className="text-red-500 w-6 h-6" />
-                      </div>
-                    </th>
-                    <th className="p-4 text-center">
-                      <div className="flex flex-col items-center gap-2">
-                        <span className="text-xl text-gray-400">MNFST AI</span>
-                        <FaCheck className="text-green-500 w-6 h-6" />
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-gray-800">
-                    <td className="p-4 text-white">Monthly cost</td>
-                    <td className="p-4 text-center text-gray-400">$2,000+</td>
-                    <td className="p-4 text-center text-gray-400">$8,000+</td>
-                    <td className="p-4 text-center">
-                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
-                        Starting at $990
-                      </span>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-gray-800">
-                    <td className="p-4 text-white">Availability</td>
-                    <td className="p-4 text-center text-gray-400">8 hours/day</td>
-                    <td className="p-4 text-center text-gray-400">8 hours/day</td>
-                    <td className="p-4 text-center">
-                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
-                        24/7
-                      </span>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-gray-800">
-                    <td className="p-4 text-white">Response time</td>
-                    <td className="p-4 text-center text-gray-400">Hours/days</td>
-                    <td className="p-4 text-center text-gray-400">Hours</td>
-                    <td className="p-4 text-center">
-                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
-                        Seconds
-                      </span>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-gray-800">
-                    <td className="p-4 text-white">Scalability</td>
-                    <td className="p-4 text-center text-gray-400">Limited</td>
-                    <td className="p-4 text-center text-gray-400">Expensive</td>
-                    <td className="p-4 text-center">
-                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
-                        Unlimited
-                      </span>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-gray-800">
-                    <td className="p-4 text-white">Setup time</td>
-                    <td className="p-4 text-center text-gray-400">Weeks</td>
-                    <td className="p-4 text-center text-gray-400">Months</td>
-                    <td className="p-4 text-center">
-                      <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
-                        24 hours
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        {/* Pricing Section */}
-        <div id="pricing" className="w-full bg-gray-900 p-4 mb-16">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-4">
-              <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 py-2 rounded-full">
-                PRICING
-              </span>
-            </div>
-
-            <h2 className="text-5xl font-semibold text-white mb-6">
-              Transparent Pricing, Flexible Options
-            </h2>
-
-            <p className="text-xl text-gray-400 max-w-3xl mb-16">
-              Choose between individual solutions or bundled packages. All prices include
-              strategy development, implementation, and training.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Individual Solution */}
-              <motion.div
-                className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="text-2xl font-semibold text-purple-500 mb-4">Individual Solution</h3>
-                <div className="text-3xl font-regular text-slate-50 mb-6">$990</div>
-                <p className="text-gray-400 mb-6">Perfect for businesses looking to start with a single automation solution.</p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    One AI Agent
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Instant Onboarding
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Strategy Development
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Solution Delivery In Less Than 2 Weeks
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Team Training
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Weekly Sessions
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    30 Days of Support
-                  </li>
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Optional Hosting on our secure server ($99/mo)
-                  </li>
-                </ul>
-                <motion.button
-                  className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection('book-call')}
-                >
-                  Get Started
-                </motion.button>
-              </motion.div>
-
-              {/* Bundle Solution */}
-              <motion.div
-                className="bg-gray-900/50 p-10 rounded-xl border border-gray-800 lg:scale-105 relative"
-                whileHover={{ scale: 1.07 }}
-              >
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm font-semibold text-white">
-                  MOST POPULAR
-                </div>
-
-                <h3 className="text-2xl font-semibold text-purple-500 mb-4">Bundle Solution</h3>
-                <div className="text-3xl font-regular text-slate-50 mb-6">$1,990</div>
-                <p className="text-gray-400 mb-8">Comprehensive packages designed for specific business needs.</p>
-
-                <div className="">
-                  {/* Base Features */}
-                  <div>
-
-                    <div className="flex items-center text-gray-300 mb-2">
-                      <FaCheck className="text-purple-500 mr-3 flex-shrink-0" />
-                      Everything in the Individual Solution
-                    </div>
-                  </div>
-                  <div>
-
-                    <div className="space-y-6 mb-8">
-                      <div>
-                        <div className="flex items-center text-gray-300 mb-2">
-                          <FaCheck className="text-purple-500 mr-3 flex-shrink-0 font-bold" />
-                          3 AI Agents from:
-                        </div>
-                        <ul className="space-y-2 pl-4 text-gray-400">
-                          <li>• Content Creator Agent</li>
-                          <li>• Community Engagement Agent</li>
-                          <li>• Customer Support Agent </li>
-                          <li>• AI Twin Agent</li>
-                          <li>• Personal Assistant Agent</li>
-                          <li>• Company Knowledge Agent</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-400 italic">
-                    Not sure which option is best? We'll help you choose during your strategy session.
-                  </p>
-                </div>
-
-                <motion.button
-                  className="w-full py-4 px-6 mt-8 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection('book-call')}
-                >
-                  Get Started
-                </motion.button>
-              </motion.div>
-
-              {/* Enterprise Solution */}
-              <motion.div
-                className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="text-2xl font-semibold text-purple-500 mb-4">Enterprise Solution</h3>
-                <div className="text-3xl font-regular text-slate-50 mb-6">$4,990</div>
-                <p className="text-gray-400 mb-6">Complete IT infrastructure with custom website development.</p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Everything in the Individual Solution and Solution Bundles
-                  </li>
-
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0 font-bold" />
-                    Unlimited Number of Agents specific to your needs
-                  </li>
-
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Custom Website Development
-                  </li>
-
-
-
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Technical Planning
-                  </li>
-
-
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Enhanced Training
-                  </li>
-
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Weekly Strategy Sessions
-                  </li>
-
-                  <li className="flex items-center text-gray-300">
-                    <FaCheck className="text-purple-500 mr-2 flex-shrink-0" />
-                    Comprehensive Integration
-                  </li>
-                </ul>
-                <motion.button
-                  className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection('book-call')}
-                >
-                  Get Started
-                </motion.button>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
         {/* FAQ Section */}
-        <div id="faq" className="w-full bg-gray-900 p-4 mb-16">
+        {/* <div id="faq" className="w-full bg-gray-900 p-4 mb-16">
           <div className="max-w-7xl mx-auto">
             <div className="mb-4">
               <span className="text-sm font-semibold text-purple-500 bg-purple-500/10 px-4 py-2 rounded-full">
@@ -729,9 +394,8 @@ function App() {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
 
-        {/* Consultation Booking Section */}
         {/* Consultation Booking Section */}
         <div id="book-call" className="w-full bg-gray-900 p-4 mb-16">
           <div className="max-w-7xl mx-auto">
@@ -804,7 +468,8 @@ function App() {
                     hideEventTypeDetails: false,
                     styles: {
                       branding: {
-                        brandColor: "#8B5CF6"
+                        brandColor: "#111827"
+
                       }
                     }
                   }}
@@ -870,7 +535,7 @@ function App() {
           </div>
         </footer>
 
-      </div>
+      </div >
     </>
   );
 }
