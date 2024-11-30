@@ -29,7 +29,7 @@ const Header = () => {
                     </div>
 
 
-                    <nav className="hidden md:flex items-center space-x-8">
+                    {/* <nav className="hidden md:flex items-center space-x-8">
                         {navItems.map((item) => (
                             <button
                                 key={item.sectionId}
@@ -39,7 +39,7 @@ const Header = () => {
                                 {item.label}
                             </button>
                         ))}
-                    </nav>
+                    </nav> */}
 
                     <motion.a
                         onClick={() => scrollToSection('book-call')}
