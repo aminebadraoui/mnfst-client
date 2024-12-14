@@ -170,7 +170,7 @@ const VideoLandingPage = () => {
           <div className="max-w-4xl mx-auto px-4">
             <p className="text-gray-400 text-center mb-2 uppercase tracking-wider">FAQS</p>
             <h2 className="text-4xl font-bold text-white text-center mb-16">
-              Have Questions?, Answers
+              Have Questions?
             </h2>
 
             {/* FAQ Accordion */}
