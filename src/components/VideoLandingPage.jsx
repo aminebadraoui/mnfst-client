@@ -164,8 +164,6 @@ const VideoLandingPage = () => {
 
       {/* FAQ Section */}
       <div className="relative z-10 bg-white">
-
-
         <div className="bg-[rgb(22,22,39)] p-4">
           <div className="max-w-4xl mx-auto px-4">
             <p className="text-gray-400 text-center mb-2 uppercase tracking-wider">FAQS</p>
@@ -178,7 +176,7 @@ const VideoLandingPage = () => {
               <Accordion
                 title="How can I use AI Agents in my business?"
               >
-                We simply focus on bringing in more sales, and we place AI Agents to Take most of your Calls And messages.
+                We simply focus on bringing in more sales, and we place AI Agents to take most of your calls and messages.
               </Accordion>
 
 
