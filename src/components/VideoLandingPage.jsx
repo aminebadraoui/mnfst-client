@@ -20,7 +20,7 @@ const VideoLandingPage = () => {
         <Header />
 
         {/* Main Content */}
-        <div className="max-w-5xl mx-auto px-4 pt-20">
+        <div className="max-w-5xl mx-auto px-4 pt-20 ">
           {/* Hero Headline */}
           <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold text-white text-center mb-8 max-w-4xl mx-auto leading-tight">
             Learn How Our Clients Use Our AI Framework To Book 15+ Sales Calls Per Day With Pre-Qualified Warm Leads
@@ -97,7 +97,7 @@ const VideoLandingPage = () => {
           preserveAspectRatio="none"
         >
           <path
-            fill="white"
+            fill="none"
             d="M0,192L48,208C96,224,192,256,288,261.3C384,267,480,245,576,224C672,203,768,181,864,181.3C960,181,1056,203,1152,208C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
         </svg>
