@@ -77,8 +77,7 @@ const TermsAndConditions = () => {
                             If you have any questions about these Terms and Conditions, please contact us at:
                         </p>
                         <div className="mt-2">
-                            <p>Email: support@mnfst.ai</p>
-                            <p>Address: [Your Business Address]</p>
+                            <p>Email: contact@mnfst.ai</p>
                         </div>
                     </section>
 
