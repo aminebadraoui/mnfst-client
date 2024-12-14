@@ -34,7 +34,7 @@ const ThankYou = () => {
                                 </li>
                                 <li className="flex items-start">
                                     <span className="text-green-500 mr-2">✓</span>
-                                    Add support@mnfst.ai to your contacts
+                                    Add contact@mnfst.ai to your contacts
                                 </li>
                                 <li className="flex items-start">
                                     <span className="text-green-500 mr-2">✓</span>
@@ -46,8 +46,8 @@ const ThankYou = () => {
                         <div className="mt-8 pt-8 border-t border-gray-200">
                             <p className="text-sm text-gray-500">
                                 Haven't received our email? Check your spam folder or contact support at{' '}
-                                <a href="mailto:support@mnfst.ai" className="text-purple-600 hover:underline">
-                                    support@mnfst.ai
+                                <a href="mailto:contact@mnfst.ai" className="text-purple-600 hover:underline">
+                                    contact@mnfst.ai
                                 </a>
                             </p>
                         </div>
