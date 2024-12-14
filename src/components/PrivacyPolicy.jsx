@@ -111,7 +111,7 @@ const PrivacyPolicy = () => {
                             If you have any questions about this Privacy Policy, please contact us:
                         </p>
                         <div className="mt-2">
-                            <p>Email: contactmnfstai.com</p>
+                            <p>Email: contact@mnfstai.com</p>
                         </div>
                     </section>
 
